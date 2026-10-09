@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IT Arena | INFINITE TECHFEST' 26</title>
+  <meta name="description"
+    content="IT Department events at INFINITE TECHFEST' 26: Tech Talks, Innovation Arena, Visual Vision, Code Strom, and Web Wizards.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <canvas id="webgl-bg"></canvas>
+  <div class="scanlines"></div>
+  <div class="noise"></div>
+
+  <header class="hud-header">
+    <a href="../home page/index.html" class="brand glass">
+      <div class="brand-icon">◈</div>
+      <div>
+        <strong>R P SARATHY</strong>
+        <span>INSTITUTE OF TECHNOLOGY</span>
+        <small class="brand-sub">(AN AUTONOMOUS INSTITUTION)</small>
+      </div>
+    </a>
+
+    <nav class="main-nav glass">
+      <a href="../home page/index.html">HOME</a>
+      <a href="#events">EVENTS</a>
+      <a href="#coordinators">COORDINATORS</a>
+    </nav>
+
+    <div class="hud-status glass">
+      <span class="status-dot"></span>
+      <span>SYSTEM ONLINE</span>
+    </div>
+  </header>
+
+  <div class="dept-switcher glass">
+    <a href="../cse/cse.html">01 // CSE</a>
+    <a href="../ai&ds/aids.html">02 // AI & DS</a>
+    <a class="active" href="#">03 // IT</a>
+    <a href="../ece/ece.html">04 // ECE</a>
+    <a href="../cyber/cyber.html">05 // CYBER</a>
+    <a href="../eee/eee.html">06 // EEE</a>
+    <a href="../mech/mech.html">07 // MECH</a>
+    <a href="../s&h/s&h.html">08 // S & H</a>
+  </div>
+
+  <main id="top">
+    <section class="hero section-grid">
+      <div class="hero-content">
+        <a class="back-link" href="../home page/index.html">← RETURN TO HOME PAGE</a>
+        <div class="eyebrow"><span></span> DEPARTMENT ARENA 03 // IT</div>
+
+        <h1>INFORMATION<br><span>TECHNOLOGY</span></h1>
+
+        <p class="hero-description">
+          Pioneering the web ecosystem, modern cloud frameworks, full-stack architectures,
+          rapid code debugging, and digital innovation. Show your engineering prowess.
+        </p>
+
+        <div class="stats">
+          <div><b>06</b><small>CHAMPIONSHIP EVENTS</small></div>
+          <div><b>₹100</b><small>ENTRY FEE</small></div>
+          <div><b>₹50</b><small>EVENT FEE (PER EVENT)</small></div>
+        </div>
+
+        <button class="cyber-btn" onclick="openRegisterModal('IT Department')">
+          <span>⚡ REGISTER FOR IT</span><i>→</i>
+        </button>
+      </div>
+
+      <div class="hero-terminal glass">
+        <div class="terminal-top">
+          <span>IT_CORE // LIVE FEED</span>
+          <span class="terminal-live">● LIVE</span>
+        </div>
+        <div class="terminal-body">
+          <div class="it-stack-wrap" id="itStackWrap">
+            <canvas id="cloudStackCanvas"></canvas>
+            <div class="it-core-badge">
+              <span class="pulse-beacon"></span>
+              <span>CLOUD DATA MATRIX // v3.0</span>
+            </div>
+          </div>
+          <div class="terminal-lines">
+            <p><b>&gt;</b> deploying_cloud_cluster.sh</p>
+            <p><b>&gt;</b> microservices_mesh: <span>HEALTHY (99.9%)</span></p>
+            <p><b>&gt;</b> database_nodes: <span>SYNCHRONIZED</span></p>
+            <p><b>&gt;</b> throughput: <span>10.4 GB/s [OPTIMAL]</span></p>
+            <p><b>&gt;</b> active_developers: <span id="counter">040+</span></p>
+            <p><b>&gt;</b> status: <span class="blink">CLUSTER OPERATIONAL_</span></p>
+          </div>
+        </div>
+        <div class="terminal-footer">
+          <span>DRAG / SCROLL TO EXPLORE</span>
+          <span>SYS.IT.03</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="events" class="content-section">
+      <div class="section-heading">
+        <span>// COMPETITION TRACKS</span>
+        <h2>OFFICIAL <strong>EVENTS</strong></h2>
+        <p>Six high-intensity competition modules engineered by the Department of Information Technology.</p>
+      </div>
+
+      <div class="events-grid">
+        <!-- EVENT 01: INNO PAPERS -->
+        <article class="event-card">
+          <div class="event-top"><b>01</b><span>RESEARCH // PRESENTATION</span></div>
+          <h3>PAPER PRESENTATION: INNOPAPERS</h3>
+          <p>The Spectrum of Innovation — Choose an innovative and relevant topic. Submit an original paper without
+            plagiarism. Prepare clear and informative PPT slides.</p>
+          <div class="meta"><span>👥 2–4 MEMBERS</span><span>⌖ M213 SMART TV CLASS ROOM</span><span>◷ 10:00 AM – 01:00
+              PM</span></div>
+          <div class="actions">
+            <button class="outline-btn"
+              onclick="openRulesModal('InnoPapers – The Spectrum of Innovation(Paper Presentation)','10:00 AM – 01:00 PM','M213 Smart TV class room',['Choose an innovative and relevant topic.','Submit an original paper without plagiarism.','Prepare clear and informative PPT slides.','Presentation time: 5–7 minutes.','Q&amp;A: 2–3 minutes.','All team members should participate.','Use simple and clear language.','Bring your PPT in the required format.'],null,'<strong>Staff Coordinator:</strong><br>Mrs.B.Sasikala, Asst Prof/IT — <a href=\'tel:9677991535\'>96779 91535</a>','2 – 4 members','Mr.G.Ganesan,<br>Senior Technical spcialist,Genious Groove ,Bangalore.')">VIEW
+              RULES</button>
+          </div>
+        </article>
+
+        <!-- EVENT 02: CLAUDE PROMPT BATTLE -->
+        <article class="event-card">
+          <div class="event-top"><b>02</b><span>AI // PROMPT BATTLE</span></div>
+          <h3>CLAUDE PROMPT BATTLE</h3>
+          <p>Participants are given a specific task or problem and must create the best possible prompt for Claude AI to
+            generate the required solution.</p>
+          <div class="meta"><span>👥 1 MEMBER</span><span>⌖ BETA LAB</span><span>◷ 12:00 PM – 01:00 PM</span></div>
+          <div class="actions">
+            <button class="outline-btn"
+              onclick="openRulesModal('Claude Prompt Battle','12:00 PM – 01:00 PM','Beta Lab',['Participants are given a specific task or problem and must create the best possible prompt for Claude AI to generate the required solution.','Team: 2 members','⏱Time: 2 minutes &nbsp; Points: 20','Scoring: Prompt quality, clarity, creativity, and output relevance','AI: Claude AI','Objective: Write the right prompt. Get the right result.'],null,'<strong>Staff Coordinator:</strong><br>Mrs.K.Sujitha, Asst Prof/IT — <a href=\'tel:9952758696\'>99527 58696</a>','1 Member','Mr.M.Rajkumar,<br>Cyber Security Consultant ,Pargavan cyyber solutions,salem<br>contact no: 7845663591<br>Email: raj.pargavan@gmail.com')">VIEW
+              RULES</button>
+          </div>
+        </article>
+
+        <!-- EVENT 03: WEB ARCHITECTS -->
+        <article class="event-card">
+          <div class="event-top"><b>03</b><span>WEB // ARCHITECTURE</span></div>
+          <h3>WEB ARCHITECTS</h3>
+          <p>Participants must create their website during the event based on the announced theme/problem statement
+            within the allotted 45–60 minutes.</p>
+          <div class="meta"><span>👥 1 MEMBER</span><span>⌖ BETA LAB</span><span>◷ 10:00 AM – 12:00 PM</span></div>
+          <div class="actions">
+            <button class="outline-btn"
+              onclick="openRulesModal('Web Architects','10:00 AM – 12:00 PM','Beta Lab',['1. Time Limit: The website must be completed within the allotted 45–60 minutes.','2. Theme: The theme / problem statement will be announced at the beginning of the event.','3. Original Work: Participants must create their website during the event. Pre-designed complete websites or templates are not allowed.','4. Submission: The completed website must be submitted before the deadline specified by the organizers.','5. Judging: Evaluation will be based on UI/Design, Creativity, Functionality, Responsiveness, and implementation of the given theme. Judges\' decision will be final.'],null,'<strong>Staff Coordinator:</strong><br>Mrs.J.Mahalakshmi, Asst Prof/IT — <a href=\'tel:6381513019\'>63815 13019</a>','1 Member','Mr.Arun Kumar Narayanan,<br>Founderof Appz Cart<br>Appz cart private limited, Salem')">VIEW
+              RULES</button>
+          </div>
+        </article>
+
+        <!-- EVENT 04: CODE DEBUGGING -->
+        <article class="event-card">
+          <div class="event-top"><b>04</b><span>CODE // DEBUGGING</span></div>
+          <h3>CODE DEBUGGING <i>(BUG HUNT)</i></h3>
+          <p>Open to all registered students competing individually across Round 1 (Preliminary Round) and Round 2
+            (Advanced Debugging).</p>
+          <div class="meta"><span>👥 1 MEMBER</span><span>⌖ BETA LAB</span><span>◷ 10:00 AM – 12:00 PM</span></div>
+          <div class="actions">
+            <button class="outline-btn"
+              onclick="openRulesModal('Bug Hunt (Code Debugging)','10:00 AM – 12:00 PM','Beta Lab',['Open to all registered students.','Participants can compete individually.','Round 1 – Preliminary Round:<ul class=\'modal-sublist\'><li>Participants will receive multiple programming/debugging questions.</li><li>Questions may include syntax, logical, runtime, and output errors.</li><li>Time: 20–30 minutes.</li></ul>','Round 2 – Advanced Debugging:<ul class=\'modal-sublist\'><li>Qualified participants will receive more complex programs.</li><li>Participants must debug and produce the correct output.</li><li>Languages may include C, C++, Java, Python, depending on the organizers.</li><li>Time: 20–30 minutes.</li></ul>','Participants must use only the computer/system provided by the organizers.','Internet access is not allowed unless explicitly permitted.','No mobile phones, smart watches, or other electronic devices are allowed during the round.'],null,'<strong>Staff Coordinator:</strong><br>Mr.T.Gokila, Asst Prof/IT — <a href=\'tel:8610636986\'>861 063 6986</a>','1 Member',null)">VIEW
+              RULES</button>
+          </div>
+        </article>
+
+        <!-- EVENT 05: POSTER PITCH -->
+        <article class="event-card">
+          <div class="event-top"><b>05</b><span>PITCH // DISPLAY</span></div>
+          <h3>POSTER PITCH</h3>
+          <p>Each team must have exactly 1 member. Participants can choose a topic of their choice and present using
+            images, charts, diagrams, and creative designs.</p>
+          <div class="meta"><span>👥 1 MEMBER</span><span>⌖ BETA LAB</span><span>◷ 12:00 PM – 01:00 PM</span></div>
+          <div class="actions">
+            <button class="outline-btn"
+              onclick="openRulesModal('Poster Pitch','12:00 PM – 01:00 PM','Beta Lab',['1. Each team must have exactly 1 member.','2. Participants can choose a topic of their choice.','3. The poster should contain clear and useful information about the topic.','4. Participants can use images, charts, diagrams, and creative designs.','5. Each team will get 3–5 minutes to present the poster.','6. Judges will consider content, creativity, design, presentation, and answers to questions.','8. Copied content is not allowed, and the judges\' decision will be final.'],null,'<strong>Staff Coordinator:</strong><br>Mrs.Indra Priyadharshini , Asst Prof/IT — <a href=\'tel:8667845282\'>86678 45282</a>','1 Member','Mr.V.Selvaraj,<br>Make Labs, Research &amp; Development pvt Ltd, Bangalore')">VIEW
+              RULES</button>
+          </div>
+        </article>
+
+        <!-- EVENT 06: PROJECT PRESENTATION -->
+        <article class="event-card">
+          <div class="event-top"><b>06</b><span>PROJECT // SHOWCASE</span></div>
+          <h3>PROJECT PRESENTATION</h3>
+          <p>Choose a relevant and innovative project topic. Ensure the project is original and plagiarism-free. Prepare
+            a clear and simple PPT.</p>
+          <div class="meta"><span>👥 3–5 MEMBERS</span><span>⌖ M214 SMART TV CLASS ROOM</span><span>◷ 10:00 AM – 01:00
+              PM</span></div>
+          <div class="actions">
+            <button class="outline-btn"
+              onclick="openRulesModal('Project Presentation','10:00 AM – 01:00 PM','M214 Smart TV class room',['Choose a relevant and innovative project topic.','Ensure the project is original and plagiarism-free.','Prepare a clear and simple PPT.','Presentation time: 5–7 minutes.','Q&amp;A: 2–3 minutes.','All team members must participate.','Clearly explain problem, objectives, methodology, and results.','Use simple and clear language.','Bring the PPT in the required format.','Be on time and follow the schedule.','Check PPT and technical setup before presenting.','Maintain discipline and professionalism throughout.'],null,'<strong>Staff Coordinator:</strong><br>Mr.T.Saravanan, AsstProf/IT — <a href=\'tel:9790373816\'>97903 73816</a>','3 - 5 Members',null)">VIEW
+              RULES</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="coordinators" class="content-section coordinators">
+      <div class="section-heading">
+        <span>// DEPARTMENT CONTACTS</span>
+        <h2>IT <strong>COMMAND CENTRE</strong></h2>
+        <p>Contact the department coordinators for submissions, guidelines and venue assistance.</p>
+      </div>
+
+      <div class="coord-grid">
+        <div class="coord-card glass">
+          <span>STAFF CO-ORDINATOR</span>
+          <h3>Mrs. A. Santhi</h3>
+          <p>Assistant Professor / Dept of IT</p>
+          <div><a href="tel:8667845282" class="coord-btn phone-btn">☎ 86678 45282</a><a
+              href="https://wa.me/918667845282" target="_blank" class="coord-btn wa-btn">◉ WHATSAPP</a></div>
+        </div>
+        <div class="coord-card glass">
+          <span>STUDENT CO-ORDINATOR</span>
+          <h3>Ms. G. Akshaya</h3>
+          <p>Final Year (IV / IT)</p>
+          <div><a href="tel:6381761876" class="coord-btn phone-btn">☎ 63817 61876</a><a
+              href="https://wa.me/916381761876" target="_blank" class="coord-btn wa-btn">◉ WHATSAPP</a></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-overlay" id="registerModal">
+    <div class="modal glass">
+      <button class="close" onclick="closeModals()">×</button>
+      <span class="modal-tag">// OFFICIAL REGISTRATION</span>
+      <h2>ACCESS <strong>GRANTED</strong></h2>
+      <div class="modal-info dept-reg-info">
+        <p class="reg-fee-item">A common registration fee of ₹100 must be paid online through the website.</p>
+        <p class="reg-fee-item">Participants can register for any number of events.</p>
+        <p class="reg-fee-item">An additional ₹50 per event can be paid on the spot at the college during event
+          registration.</p>
+      </div>
+
+      <div class="dept-reg-note">
+        <strong>Note:</strong> Please make sure you have checked the event details and rules carefully before
+        registering. Once you have confirmed the details, proceed with the registration.
+      </div>
+
+      <button class="cyber-btn full" onclick="closeModals()">REGISTER</button>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="rulesModal">
+    <div class="modal glass">
+      <button class="close" onclick="closeModals()">×</button>
+      <span class="modal-tag">// OFFICIAL RULES &amp; GUIDELINES</span>
+      <h2 id="rulesTitle">EVENT DETAILS</h2>
+      <div class="rule-meta">
+        <span id="rulesTime" style="display:none;"></span>
+        <span id="rulesVenue"></span>
+        <span id="rulesTeam" style="display:none;"></span>
+      </div>
+
+      <div class="modal-rules-heading">// GUIDELINES</div>
+      <ul id="rulesBody"></ul>
+
+      <div class="modal-criteria-box" id="modalCriteriaBox" style="display:none;">
+        <span class="criteria-tag">// JUDGING CRITERIA</span>
+        <p id="rulesCriteriaText"></p>
+      </div>
+
+      <div class="modal-prize-box" id="modalSponsorBox" style="display:none;">
+        <span class="prize-tag">// JURY FROM INDUSTRY</span>
+        <p id="rulesSponsorText"></p>
+      </div>
+
+      <div class="modal-coord-box" id="modalCoordBox" style="display:none;">
+        <span class="coord-tag">// STAFF COORDINATOR</span>
+        <p id="rulesCoordText"></p>
+      </div>
+
+      <button class="cyber-btn full" onclick="closeModals()">ACKNOWLEDGE PROTOCOL</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

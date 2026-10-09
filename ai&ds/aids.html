@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI&DS Arena | INFINITE TECHFEST' 26</title>
+  <meta name="description" content="AI&DS Department events at INFINITE TECHFEST' 26">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=6">
+</head>
+
+<body>
+  <canvas id="webgl-bg"></canvas>
+  <div class="scanlines"></div>
+  <div class="noise"></div>
+
+  <header class="hud-header">
+    <a href="../home page/index.html" class="brand glass">
+      <div class="brand-icon">◈</div>
+      <div>
+        <strong>R P SARATHY</strong>
+        <span>INSTITUTE OF TECHNOLOGY</span>
+        <small class="brand-sub">(AN AUTONOMOUS INSTITUTION)</small>
+      </div>
+    </a>
+
+    <nav class="main-nav glass">
+      <a href="../home page/index.html">HOME</a>
+      <a href="#events">EVENTS</a>
+      <a href="#coordinators">COORDINATORS</a>
+    </nav>
+
+    <div class="hud-status glass">
+      <span class="status-dot"></span>
+      <span>SYSTEM ONLINE</span>
+    </div>
+  </header>
+
+  <div class="dept-switcher glass">
+    <a href="../cse/cse.html">01 // CSE</a>
+    <a class="active" href="#">02 // AI & DS</a>
+    <a href="../it/it.html">03 // IT</a>
+    <a href="../ece/ece.html">04 // ECE</a>
+    <a href="../cyber/cyber.html">05 // CYBER</a>
+    <a href="../eee/eee.html">06 // EEE</a>
+    <a href="../mech/mech.html">07 // MECH</a>
+    <a href="../s&h/s&h.html">08 // S & H</a>
+  </div>
+
+  <main id="top">
+    <section class="hero section-grid">
+      <div class="hero-content">
+        <a class="back-link" href="../home page/index.html">← RETURN TO HOME PAGE</a>
+        <div class="eyebrow"><span></span> DEPARTMENT ARENA 02 // AI&DS</div>
+
+        <h1>ARTIFICIAL INTELLIGENCE <em>&amp;</em><br><span>DATA SCIENCE</span></h1>
+        <p class="hero-description">
+          "Artificial intelligence is likely to be either the best or worst thing to happen to humanity."
+        </p>
+
+        <div class="stats">
+          <div><b>05</b><small>CHAMPIONSHIP EVENTS</small></div>
+          <div><b>₹100</b><small>ENTRY FEE</small></div>
+          <div><b>₹50</b><small>EVENT FEE (PER EVENT)</small></div>
+        </div>
+
+        <button class="cyber-btn" onclick="openRegisterModal('AI&DS Department')">
+          <span>⚡ REGISTER FOR AI&DS </span><i>→</i>
+        </button>
+      </div>
+
+      <div class="hero-terminal glass">
+        <div class="terminal-top">
+          <span>ROBOTICS_AI // MECHATRONIC_UNIT</span>
+          <span class="terminal-live">● ROBOT ONLINE</span>
+        </div>
+        <div class="terminal-body">
+          <div class="ai-neural-wrap" id="aiNeuralWrap">
+            <canvas id="neuralCanvas"></canvas>
+            <div class="ai-core-badge">
+              <span class="pulse-beacon"></span>
+              <span>CYBERNETIC ROBOTICS & AI // v7.0</span>
+            </div>
+          </div>
+          <div class="terminal-lines">
+            <p><b>&gt;</b> chassis_system: <span>HUMANOID MECHATRONICS</span></p>
+            <p><b>&gt;</b> neural_coprocessor: <span>TENSOR AI EMBEDDED</span></p>
+            <p><b>&gt;</b> ocular_sensors: <span>BIONIC COMPUTER VISION (60 FPS)</span></p>
+            <p><b>&gt;</b> mechatronic_servos: <span>12-DOF HIGH-SPEED ACTUATORS</span></p>
+            <p><b>&gt;</b> kinematics_response: <span>0.02ms SERVO SYNC</span></p>
+            <p><b>&gt;</b> autonomous_state: <span class="blink">DECISION_ENGINE_ACTIVE_</span></p>
+          </div>
+        </div>
+        <div class="terminal-footer">
+          <span>DRAG TO ORBIT ROBOTIC MODEL</span>
+          <span>ROBOTICS.AI.02</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="events" class="content-section">
+      <div class="section-heading">
+        <span>// COMPETITION TRACKS</span>
+        <h2>OFFICIAL <strong>EVENTS</strong></h2>
+        <p>Five high-intensity competition modules engineered by the Department of ARTIFICIAL INTELLIGENCE &amp; DATA
+          SCIENCE.</p>
+      </div>
+
+      <div class="events-grid">
+        <!-- EVENT 01: PAPER PRESENTATION -->
+        <article class="event-card">
+          <div class="event-top"><b>01</b><span>RESEARCH // PRESENTATION</span></div>
+          <h3>PAPER PRESENTATION</h3>
+          <p>Participants present a research-based or innovative technical topic before judges using PowerPoint.</p>
+          <div class="meta">
+            <span>👥 INDIVIDUAL / TEAM</span>
+            <span>⌖ LH-05</span>
+            <span>◷ 10:30 AM – 12:30 PM</span>
+          </div>
+          <div class="actions">
+            <button class="outline-btn" onclick="openRulesModal(
+                'Paper Presentation',
+                '10:30 AM – 12:30 PM',
+                'LH-05',
+                [
+                  'Type: Individual / Team participation.',
+                  'The event has 2 rounds. Paper/PPT must be submitted before the event, and the presentation must use PowerPoint.',
+                  'Participants must complete the presentation within the given time, followed by a short Q&amp;A. Round 1 selections proceed to Round 2.',
+                  'Duration: Round 1 – 5 min | Round 2 – 5 min | Total – 15 min/team.'
+                ],
+                '<strong>Judging Criteria:</strong> Technical content, originality, presentation skill, clarity and Q&amp;A.<br><strong>Duration:</strong> Round 1 – 5 min | Round 2 – 5 min | Total – 15 min/team',
+                '<strong>Staff Coordinator/Jury:</strong><br>Mrs. N.Pushpa ASP/AI&amp;DS<br><br><strong>Student Coordinators:</strong><br>1) Kishorerajpriyan M<br>2) Prathiksha J',
+                'Individual / Team',
+                '<strong>Chief Guest &amp; Jury:</strong><br>MOHAN, Futogen Private Limited, Founder and CEO',
+                '1st Prize: ₹1,000 | 2nd Prize: ₹750 | 3rd Prize: ₹500<br>Participation certificate for all participants.'
+              )">VIEW RULES</button>
+          </div>
+        </article>
+
+        <!-- EVENT 02: PRO-PITCH -->
+        <article class="event-card">
+          <div class="event-top"><b>02</b><span>PROMPT // APP INNOVATION</span></div>
+          <h3>PRO-PITCH <i>(PROMPT TO APP)</i></h3>
+          <p>Participants use AI prompts to develop a functional app based on an app/idea selected through a Lucky Draw.
+          </p>
+          <div class="meta">
+            <span>👥 INDIVIDUAL / TEAM</span>
+            <span>⌖ DELTA LAB</span>
+            <span>◷ 10:30 AM – 1:00 PM</span>
+          </div>
+          <div class="actions">
+            <button class="outline-btn" onclick="openRulesModal(
+                'Pro-pitch (Prompt to App)',
+                '10:30 AM – 1:00 PM',
+                'DELTA LAB',
+                [
+                  'Type: Individual / Team participation.',
+                  'The event has 2 rounds. The app/idea is selected through Lucky Draw.',
+                  'AI tools such as ChatGPT, Gemini, Claude and Copilot are allowed for coding, design, features and development.',
+                  'Participants must not submit screenshots as the final output. The exact name of the selected/reference app must not be copied or revealed.',
+                  'Participants must create the app with a new and unique name. The final working app will be evaluated directly.',
+                  'Round 1 qualifiers proceed to Round 2.'
+                ],
+                '<strong>Judging Criteria:</strong> Based on functionality, creativity, AI prompt usage, UI/design and final app quality.<br><strong>Duration:</strong> Round 1: 10:30–11:30 AM (40 min) | Round 2: 12:00–1:00 PM (40 min) | Total: 1 hr 20 min',
+                '<strong>Staff Coordinator/Jury:</strong><br>Mrs. D.Vidya AP/AI&amp;DS<br><br><strong>Student Coordinators:</strong><br>1) Kabil V<br>2) Vaishnavi R',
+                'Individual / Team',
+                '<strong>Chief Guest &amp; Jury:</strong><br>SANJAI PRABHAKARAN, Project Trainee to Technical Trainee, Zoho, Salem',
+                '1st Prize: ₹1,000 | 2nd Prize: ₹750 | 3rd Prize: ₹500<br>Participation certificate for all participants.'
+              )">VIEW RULES</button>
+          </div>
+        </article>
+
+        <!-- EVENT 03: VIZ CRAFT -->
+        <article class="event-card">
+          <div class="event-top"><b>03</b><span>DATA // VISUALIZATION</span></div>
+          <h3>VIZ CRAFT <i>(AI DATA VISUALIZATION)</i></h3>
+          <p>Participants analyze a given dataset and use AI-assisted tools to create meaningful visualizations and
+            communicate useful insights.</p>
+          <div class="meta">
+            <span>👥 MAX 2 PARTICIPANTS</span>
+            <span>⌖ THETA LAB</span>
+            <span>◷ 10:30 AM – 1:00 PM</span>
+          </div>
+          <div class="actions">
+            <button class="outline-btn" onclick="openRulesModal(
+                'VizCraft (AI Data Visualization)',
+                '10:30 AM – 1:00 PM',
+                'THETA LAB',
+                [
+                  'Type: Individual / Maximum 2 Participants.',
+                  'The event has 2 rounds, with a dataset provided in each round.',
+                  'Participants may use AI tools for data analysis, visualization suggestions and assistance.',
+                  'Excel, Power BI, Python or other approved tools may be used.',
+                  'Participants must create suitable visualizations based on the given dataset and explain the insights obtained. Round 1 qualifiers proceed to Round 2.'
+                ],
+                '<strong>Judging Criteria:</strong> Based on data accuracy, visualization quality, insight interpretation, creativity and presentation.<br><strong>Duration:</strong> Round 1: 10:30–11:30 AM (30 min) | Round 2: 12:00–1:00 PM (30 min) | Total: 1 hour',
+                '<strong>Staff Coordinator/Jury:</strong><br>Mrs. R.Devi priya ASP/AI&amp;DS<br><br><strong>Student Coordinators:</strong><br>1) Priyanka M<br>2) Sakthi P',
+                'Individual / Max 2 Participants',
+                '<strong>Chief Guest &amp; Jury:</strong><br>PRIYA S, Junior Data Analyst, Imagecon Academy, Salem',
+                '1st Prize: ₹1,000 | 2nd Prize: ₹750 | 3rd Prize: ₹500<br>Participation certificate for all participants.'
+              )">VIEW RULES</button>
+          </div>
+        </article>
+
+        <!-- EVENT 04: CODE FLEX -->
+        <article class="event-card">
+          <div class="event-top"><b>04</b><span>MULTI-LANG // CODING</span></div>
+          <h3>CODE FLEX <i>(MULTI-LANGUAGE CODING)</i></h3>
+          <p>Participants solve programming problems using a programming language of their choice and produce the
+            correct output.</p>
+          <div class="meta">
+            <span>👤 INDIVIDUAL</span>
+            <span>⌖ DELTA LAB</span>
+            <span>◷ 10:30 AM – 1:00 PM</span>
+          </div>
+          <div class="actions">
+            <button class="outline-btn" onclick="openRulesModal(
+                'Code Flex (Multi-language Coding Challenge)',
+                '10:30 AM – 1:00 PM',
+                'DELTA LAB',
+                [
+                  'Type: Individual participation.',
+                  'The event has 2 rounds. Languages such as Python, Java, C and C++ are allowed.',
+                  'Participants can choose any permitted programming language to solve the given problems.',
+                  'Internet, AI tools and external assistance are not allowed. Source code must be submitted within the given time. Round 1 qualifiers proceed to Round 2.'
+                ],
+                '<strong>Judging Criteria:</strong> Based on correctness, logic, efficiency and completion time.<br><strong>Duration:</strong> Round 1: 10:30–11:30 AM (30 min) | Round 2: 12:00–1:00 PM (30 min) | Total: 1 hour',
+                '<strong>Staff Coordinator/Jury:</strong><br>Mrs. Lavanya AP/AI&amp;DS<br><br><strong>Student Coordinators:</strong><br>1) Krishnakumar S<br>2) Roshini V',
+                'Individual',
+                '<strong>Chief Guest &amp; Jury:</strong><br>PARIVARTHINI, Futogen Private Limited, Java Full Stack Developer',
+                '1st Prize: ₹1,000 | 2nd Prize: ₹750 | 3rd Prize: ₹500<br>Participation certificate for all participants.'
+              )">VIEW RULES</button>
+          </div>
+        </article>
+
+        <!-- EVENT 05: COGNIX -->
+        <article class="event-card">
+          <div class="event-top"><b>05</b><span>INTELLIGENCE // QUIZ</span></div>
+          <h3>COGNIX <i>(QUIZ)</i></h3>
+          <p>Participants compete in a technical quiz covering Artificial Intelligence, Data Science, Machine Learning
+            and current developments in AI.</p>
+          <div class="meta">
+            <span>👤 INDIVIDUAL</span>
+            <span>⌖ THETA LAB</span>
+            <span>◷ 10:30 AM – 1:00 PM</span>
+          </div>
+          <div class="actions">
+            <button class="outline-btn" onclick="openRulesModal(
+                'Cognix (Quiz)',
+                '10:30 AM – 1:00 PM',
+                'THETA LAB',
+                [
+                  'Type: Individual participation.',
+                  'The event has 2 rounds. Each round consists of 20 questions covering AI, Data Science, Machine Learning, Deep Learning, Generative AI, recent AI technologies and AI-related current affairs.',
+                  'Round 1 is the preliminary round, and shortlisted participants proceed to Round 2.',
+                  'Internet, AI tools and external assistance are not allowed.'
+                ],
+                '<strong>Judging Criteria:</strong> Based on accuracy and completion time.<br><strong>Duration:</strong> Round 1: 10:30–11:30 AM (30 min) | Round 2: 12:00–1:00 PM (30 min) | Total: 1 hour',
+                '<strong>Staff Coordinator/Jury:</strong><br>Mr. Sivasubramani AP/AI&amp;DS<br><br><strong>Student Coordinators:</strong><br>1) Satheeshwaran S<br>2) Sariga M',
+                'Individual',
+                '<strong>Chief Guest &amp; Jury:</strong><br>Mohan M, CEO, Patora AI &amp; IT Services',
+                '1st Prize: ₹1,000 | 2nd Prize: ₹750 | 3rd Prize: ₹500<br>Participation certificate for all participants.'
+              )">VIEW RULES</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="coordinators" class="content-section coordinators">
+      <div class="section-heading">
+        <span>// DEPARTMENT CONTACTS</span>
+        <h2>AI&DS <strong>COMMAND CENTRE</strong></h2>
+        <p>Contact the department coordinators for submissions, guidelines and venue assistance.</p>
+      </div>
+
+      <div class="coord-grid">
+        <div class="coord-card glass">
+          <span>STAFF CO-ORDINATOR</span>
+          <h3>Mrs. S. PRIYANKA</h3>
+          <p>Assistant Professor / Dept of AI&DS</p>
+          <div><a href="tel:9025593180" class="coord-btn phone-btn">☎ 90255 93180</a><a
+              href="https://wa.me/919025593180" target="_blank" class="coord-btn wa-btn">◉ WHATSAPP</a></div>
+        </div>
+        <div class="coord-card glass">
+          <span>STUDENT CO-ORDINATOR</span>
+          <h3>Mr. BALAJIMANIKANDHAAN S S</h3>
+          <p>Final Year (III / AI&DS)</p>
+          <div><a href="tel:7358213736" class="coord-btn phone-btn">☎ 73582 13736</a><a
+              href="https://wa.me/917358213736" target="_blank" class="coord-btn wa-btn">◉ WHATSAPP</a></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-overlay" id="registerModal">
+    <div class="modal glass">
+      <button class="close" onclick="closeModals()">×</button>
+      <span class="modal-tag">// OFFICIAL REGISTRATION</span>
+      <h2>ACCESS <strong>GRANTED</strong></h2>
+      <div class="modal-info dept-reg-info">
+        <p class="reg-fee-item">A common registration fee of ₹100 must be paid online through the website.</p>
+        <p class="reg-fee-item">Participants can register for any number of events.</p>
+        <p class="reg-fee-item">An additional ₹50 per event can be paid on the spot at the college during event
+          registration.</p>
+      </div>
+
+      <div class="dept-reg-note">
+        <strong>Note:</strong> Please make sure you have checked the event details and rules carefully before
+        registering. Once you have confirmed the details, proceed with the registration.
+      </div>
+
+      <a class="cyber-btn full"
+        href="https://docs.google.com/forms/d/e/1FAIpQLSdZyxZ7WPDJgp8QRKyz3Yx3eMHgPIDZBQLA64NfrrmdWon1sA/viewform"
+        target="_blank" rel="noopener noreferrer">REGISTER</a>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="rulesModal">
+    <div class="modal glass">
+      <button class="close" onclick="closeModals()">×</button>
+      <span class="modal-tag">// OFFICIAL RULES &amp; GUIDELINES</span>
+      <h2 id="rulesTitle">EVENT DETAILS</h2>
+      <div class="rule-meta">
+        <span id="rulesTime"></span>
+        <span id="rulesVenue"></span>
+        <span id="rulesTeam" style="display:none;"></span>
+      </div>
+
+      <div class="modal-rules-heading">// GUIDELINES</div>
+      <ul id="rulesBody"></ul>
+
+      <div class="modal-criteria-box" id="modalCriteriaBox" style="display:none;">
+        <span class="criteria-tag">// EVALUATION &amp; DURATION</span>
+        <p id="rulesCriteriaText"></p>
+      </div>
+
+      <div class="modal-guest-box" id="modalGuestBox" style="display:none;">
+        <span class="guest-tag">// CHIEF GUEST &amp; JURY</span>
+        <p id="rulesGuestText"></p>
+      </div>
+
+      <div class="modal-prize-box" id="modalPrizeBox" style="display:none;">
+        <span class="prize-tag">// CASH PRIZE POOL</span>
+        <p id="rulesPrizeText"></p>
+      </div>
+
+      <div class="modal-coord-box" id="modalCoordBox" style="display:none;">
+        <span class="coord-tag">// EVENT CO-ORDINATORS</span>
+        <p id="rulesCoordText"></p>
+      </div>
+
+      <button class="cyber-btn full" onclick="closeModals()">ACKNOWLEDGE PROTOCOL</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

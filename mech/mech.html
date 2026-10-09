@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>MECH Arena | INFINITE TECHFEST' 26</title>
+
+  <meta name="description" content="Mechanical Engineering Department events at INFINITE TECHFEST' 26">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <canvas id="webgl-bg"></canvas>
+  <div class="scanlines"></div>
+  <div class="noise"></div>
+
+
+  <!-- =========================
+       HEADER
+  ========================== -->
+
+  <header class="hud-header">
+
+    <a href="../home page/index.html" class="brand glass">
+
+      <div class="brand-icon">⚙</div>
+
+      <div>
+        <strong>R P SARATHY</strong>
+        <span>INSTITUTE OF TECHNOLOGY</span>
+        <small class="brand-sub">(AN AUTONOMOUS INSTITUTION)</small>
+      </div>
+
+    </a>
+
+
+    <nav class="main-nav glass">
+
+      <a href="../home page/index.html">HOME</a>
+      <a href="#events">EVENTS</a>
+      <a href="#coordinators">COORDINATORS</a>
+
+    </nav>
+
+
+    <div class="hud-status glass">
+
+      <span class="status-dot"></span>
+      <span>SYSTEM ONLINE</span>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- =========================
+       DEPARTMENT SWITCHER
+  ========================== -->
+
+  <div class="dept-switcher glass">
+
+    <a href="../cse/cse.html">01 // CSE</a>
+    <a href="../ai&ds/aids.html">02 // AI & DS</a>
+    <a href="../it/it.html">03 // IT</a>
+    <a href="../ece/ece.html">04 // ECE</a>
+    <a href="../cyber/cyber.html">05 // CYBER</a>
+    <a href="../eee/eee.html">06 // EEE</a>
+
+    <a class="active" href="#">
+      07 // MECH
+    </a>
+
+    <a href="../s&h/s&h.html">08 // S & H</a>
+
+  </div>
+
+
+
+  <main id="top">
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <section class="hero section-grid">
+
+      <div class="hero-content">
+
+
+        <a class="back-link" href="../home page/index.html">
+          ← RETURN TO HOME PAGE
+        </a>
+
+
+        <div class="eyebrow">
+
+          <span></span>
+
+          DEPARTMENT ARENA 07 // MECH
+
+        </div>
+
+
+        <h1>
+          MECHANICAL<br>
+          <span>ENGINEERING</span>
+        </h1>
+
+
+        <p class="hero-description">
+
+          Showcase your technical knowledge and engineering skills
+          through paper presentation, expert interaction, drafting,
+          technical speaking and engineering quiz challenges.
+
+        </p>
+
+
+        <!-- STATS -->
+        <div class="stats">
+          <div>
+            <b>06</b>
+            <small>CHAMPIONSHIP EVENTS</small>
+          </div>
+          <div>
+            <b>₹100</b>
+            <small>ENTRY FEE</small>
+          </div>
+          <div>
+            <b>₹50</b>
+            <small>EVENT FEE (PER EVENT)</small>
+          </div>
+        </div>
+
+
+        <button class="cyber-btn" onclick="openRegisterModal(
+          'Mechanical Engineering Department'
+          )">
+
+          <span>
+            ⚡ REGISTER FOR MECHANICAL
+          </span>
+
+          <i>→</i>
+
+        </button>
+
+      </div>
+
+
+
+      <!-- =========================
+           TERMINAL
+      ========================== -->
+
+      <div class="hero-terminal glass">
+
+
+        <div class="terminal-top">
+
+          <span>
+            MECH_CORE // LIVE FEED
+          </span>
+
+          <span class="terminal-live">
+            ● LIVE
+          </span>
+
+        </div>
+
+
+        <div class="terminal-body">
+
+
+          <div class="mech-gear-wrap" id="mechGearWrap">
+            <canvas id="mechGearCanvas"></canvas>
+            <div class="mech-core-badge">
+              <span class="pulse-beacon"></span>
+              <span>PLANETARY GEAR DRIVE // 3600 RPM</span>
+            </div>
+          </div>
+
+          <div class="terminal-lines">
+            <p><b>&gt;</b> initializing_kinematic_engine.py</p>
+            <p><b>&gt;</b> rotational_velocity: <span>3600 RPM [LOCKED]</span></p>
+            <p><b>&gt;</b> torque_transmission: <span>850 Nm [OPTIMAL]</span></p>
+            <p><b>&gt;</b> thermal_stress: <span>NOMINAL (42°C)</span></p>
+            <p><b>&gt;</b> mech_engineers: <span id="counter">040+</span></p>
+            <p><b>&gt;</b> status: <span class="blink">GEAR TRAIN ENGAGED_</span></p>
+          </div>
+
+        </div>
+
+
+        <div class="terminal-footer">
+
+          <span>
+            DRAG / SCROLL TO EXPLORE
+          </span>
+
+          <span>
+            SYS.MECH.07
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         EVENTS
+    ========================== -->
+
+    <section id="events" class="content-section">
+      <div class="section-heading">
+        <span>// MECHANICAL COMPETITION TRACKS</span>
+        <h2>OFFICIAL <strong>MECH EVENTS</strong></h2>
+        <p>Six championship competition tracks presented by the Department of Mechanical Engineering.</p>
+      </div>
+
+      <div class="events-grid">
+        <!-- EVENT 01: PAPER PRESENTATION -->
+        <article class="event-card">
+          <div class="event-top">
+            <b>01</b>
+            <span>DESIGN // PRESENTATION</span>
+          </div>
+          <h3>PAPER PRESENTATION</h3>
+          <p>
+            Abstract submission required before the deadline (250–300 words). Topics should mainly focus on Next-Generation Technologies in Mechanical Engineering.
+          </p>
+          <div class="meta">
+            <span>👥 1–3 MEMBERS</span>
+            <span>⌖ SMART TV CLASS ROOM 214</span>
+            <span>◷ 10.30 AM – 11.30 AM</span>
+          </div>
+          <div class="actions">
+            <button
+              class="outline-btn"
+              onclick="openRulesModal(
+                'Paper Presentation',
+                '10.30 AM To 11.30 AM',
+                'Smart TV Class Room 214',
+                [
+                  'Abstract submission required before the deadline (250–300 words).',
+                  'Presentation time: 8–10 minutes.',
+                  'Q&amp;A: 2–3 minutes.',
+                  'Team size: 1 – 3 members.',
+                  'Topics should mainly focus on Next-Generation Technologies in Mechanical Engineering. (Areas include EVs, AI, Robotics, 3D Printing, Smart Manufacturing, Advanced Materials, Renewable Energy, Digital Twins, Industry 5.0, and Autonomous Systems)',
+                  'Judging criteria: Content depth, original research, presentation clarity and Q&amp;A accuracy.'
+                ],
+                '<strong>Haribalan A</strong><br>Design engineer Renaatus Procon Private Limited, Erode',
+                '<strong>Staff Coordinator/Jury:</strong><br>Dr. V. Haribalaji, HoD/Mech<br>Dr. S. Elavarasan, AP/Mech<br><br><strong>Student Coordinator:</strong><br>1. Aravinth C<br>2. Mayakannan K<br>3. Madhumitha M A',
+                '1 – 3 members',
+                '1st prize – ₹750<br>2nd prize – ₹500<br>3rd prize – ₹250<br>Participation certificate'
+              )">
+              VIEW RULES
+            </button>
+          </div>
+        </article>
+
+        <!-- EVENT 02: MECH HACK X -->
+        <article class="event-card">
+          <div class="event-top">
+            <b>02</b>
+            <span>ENGINEERING // HACKATHON</span>
+          </div>
+          <h3>MECH HACK X</h3>
+          <p>
+            Problem statements will be pre-announced or released at the beginning of the hackathon. Teams must develop a solution within the given time.
+          </p>
+          <div class="meta">
+            <span>👥 2–4 MEMBERS</span>
+            <span>⌖ SMART TV CLASS ROOM 214</span>
+            <span>◷ 11.40 AM – 12.50 PM</span>
+          </div>
+          <div class="actions">
+            <button
+              class="outline-btn"
+              onclick="openRulesModal(
+                'Mech Hack X',
+                '11.40 AM To 12.50 PM',
+                'Smart TV Class Room 214',
+                [
+                  'Problem statements will be pre-announced or released at the beginning of the hackathon.',
+                  'Teams must develop a solution within the given time.',
+                  'Ready-made projects are not allowed.',
+                  'Participants must bring their own laptops and hardware.',
+                  'Team size: 2–4 members.',
+                  'Live demonstration is compulsory.'
+                ],
+                '<strong>Haribalan A</strong><br>Design engineer Renaatus Procon Private Limited, Erode',
+                '<strong>Staff Coordinator/Jury:</strong><br>Mr. A. Inbasekaran, AP/Mech<br><br><strong>Student Coordinator:</strong><br>1. Karthick S<br>2. Harish S<br>3. Narain Sarvesh I',
+                '2–4 members',
+                '1st prize – ₹750<br>2nd prize – ₹500<br>3rd prize – ₹250<br>Participation certificate'
+              )">
+              VIEW RULES
+            </button>
+          </div>
+        </article>
+
+        <!-- EVENT 03: PROJECT XPLORE -->
+        <article class="event-card">
+          <div class="event-top">
+            <b>03</b>
+            <span>PROJECT // EXPO</span>
+          </div>
+          <h3>PROJECT XPLORE</h3>
+          <p>
+            Projects must relate to Mechanical Engineering and allied areas. Original and innovative projects explaining the working and practical application.
+          </p>
+          <div class="meta">
+            <span>👥 2–4 MEMBERS</span>
+            <span>⌖ MECH – LH20</span>
+            <span>◷ 10.30 AM – 11.30 AM</span>
+          </div>
+          <div class="actions">
+            <button
+              class="outline-btn"
+              onclick="openRulesModal(
+                'Project Xplore',
+                '10.30 AM To 11.30 AM',
+                'MECH – LH20',
+                [
+                  'Projects must relate to Mechanical Engineering and allied areas.',
+                  'Team size: 2–4 members.',
+                  'Projects can be hybrid.',
+                  'Participants must bring their own project and materials.',
+                  'Projects must be original and innovative.',
+                  'Previously exhibited projects are not allowed.',
+                  'Teams must explain the working and application.',
+                  'Live demonstration is required.',
+                  'Setup must be completed within the given time.'
+                ],
+                '<strong>Vasanth murugan</strong><br>CEO, Nitha aerospace, salem',
+                '<strong>Staff Coordinator/Jury:</strong><br>Mr. R. Ranjith Kumar, AP/Mech<br><br><strong>Student Coordinator:</strong><br>1. Vignesh Kumar B<br>2. Harish Manikandan U<br>3. Tamilselvan S',
+                '2–4 members',
+                '1st prize – ₹750<br>2nd prize – ₹500<br>3rd prize – ₹250<br>Participation certificate'
+              )">
+              VIEW RULES
+            </button>
+          </div>
+        </article>
+
+        <!-- EVENT 04: POSTER PRO -->
+        <article class="event-card">
+          <div class="event-top">
+            <b>04</b>
+            <span>POSTER // PRESENTATION</span>
+          </div>
+          <h3>POSTER PRO</h3>
+          <p>
+            Individual participation only. Topic/theme will be given on the spot. Poster must be completed within the allotted time, original, and creative.
+          </p>
+          <div class="meta">
+            <span>👤 INDIVIDUAL</span>
+            <span>⌖ MECH – LH21</span>
+            <span>◷ 11.40 AM – 12.50 PM</span>
+          </div>
+          <div class="actions">
+            <button
+              class="outline-btn"
+              onclick="openRulesModal(
+                'Poster Pro',
+                '11.40 AM To 12.50 PM',
+                'MECH – LH21',
+                [
+                  'Individual participation only.',
+                  'Topic/theme will be given on the spot.',
+                  'Poster must be completed within the allotted time.',
+                  'Poster must be original and creative.',
+                  'Participants must bring their own materials/laptop, if required.',
+                  'Plagiarism or copying is not allowed.',
+                  'Poster must be technically relevant and clear.',
+                  'Inappropriate content will lead to disqualification.',
+                  'Judges’ decision will be final and binding.'
+                ],
+                '<strong>Vasanth murugan</strong><br>CEO, Nitha aerospace, salem',
+                '<strong>Staff Coordinator/Jury:</strong><br>Mr. N. Prabakaran, AP/Mech<br><br><strong>Student Coordinator:</strong><br>1. Poovarasan J M<br>2. Harishgokul S<br>3. Ajay Kumar M',
+                'Individual',
+                '1st prize – ₹750<br>2nd prize – ₹500<br>3rd prize – ₹250<br>Participation certificate'
+              )">
+              VIEW RULES
+            </button>
+          </div>
+        </article>
+
+        <!-- EVENT 05: QUIZ - BRAIN BOLT -->
+        <article class="event-card">
+          <div class="event-top">
+            <b>05</b>
+            <span>QUIZ // TECHNICAL</span>
+          </div>
+          <h3>QUIZ - BRAIN BOLT</h3>
+          <p>
+            Each question has a time limit. Put your engineering knowledge to the test across time-bound rounds and rapid-fire questions.
+          </p>
+          <div class="meta">
+            <span>⌖ MECH – LH20</span>
+            <span>◷ 2.00 PM – 3.00 PM</span>
+          </div>
+          <div class="actions">
+            <button
+              class="outline-btn"
+              onclick="openRulesModal(
+                'Quiz - Brain Bolt',
+                '2.00 PM To 3.00 PM',
+                'MECH – LH20',
+                [
+                  'Each question has a time limit.',
+                  'Mobile phones, smart watches, calculators, books, and notes are not allowed, unless permitted by the quizmaster.',
+                  'Do not discuss answers with other teams.',
+                  'Submitted answers cannot be changed.',
+                  'In the Rapid-Fire Round, questions can be passed only as instructed by the quizmaster.',
+                  'The quizmaster’s decision is final.'
+                ],
+                null,
+                '<strong>Staff Coordinator/Jury:</strong><br>Mr. S. Jeevanantham, AP/Mech<br><br><strong>Student Coordinator:</strong><br>1. Vijay T<br>2. Aravinthan V<br>3. Nikilesh M',
+                null,
+                '1st prize – ₹750<br>2nd prize – ₹500<br>3rd prize – ₹250<br>Participation certificate'
+              )">
+              VIEW RULES
+            </button>
+          </div>
+        </article>
+
+        <!-- EVENT 06: AQUA ROCKET -->
+        <article class="event-card">
+          <div class="event-top">
+            <b>06</b>
+            <span>ROCKET // LAUNCH</span>
+          </div>
+          <h3>AQUA ROCKET</h3>
+          <p>
+            Design and build a water-powered rocket using water and compressed air. Winner will be decided based on height, flight duration, or accuracy.
+          </p>
+          <div class="meta">
+            <span>👥 2–4 MEMBERS</span>
+            <span>⌖ PLAY GROUND</span>
+            <span>◷ 1.30 PM – 3.00 PM</span>
+          </div>
+          <div class="actions">
+            <button
+              class="outline-btn"
+              onclick="openRulesModal(
+                'Aqua Rocket',
+                '1.30 PM To 3.00 PM',
+                'Play Ground',
+                [
+                  'Team: 2–4 members.',
+                  'Design and build a water-powered rocket.',
+                  'Use only water and compressed air.',
+                  'Use safe and lightweight materials. No hazardous materials.',
+                  'Launch only in the designated area under organizer supervision.',
+                  'Follow all safety instructions during the event.',
+                  'Each team will get a specified number of launch attempts.',
+                  'Winner will be decided based on height, flight duration, or accuracy.',
+                  'Teams must bring their own rocket and materials.',
+                  'Judges’ decision will be final.'
+                ],
+                null,
+                '<strong>Staff Coordinator/Jury:</strong><br>Mr. N. Srinivasan, AP/Mech<br><br><strong>Student Coordinator:</strong><br>1. Poovarasan J M<br>2. Baskar G<br>3. Vasanthkumar',
+                '2–4 members',
+                '1st prize – ₹750<br>2nd prize – ₹500<br>3rd prize – ₹250<br>Participation certificate'
+              )">
+              VIEW RULES
+            </button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+
+
+    <!-- =========================
+         COORDINATORS
+    ========================== -->
+
+    <section id="coordinators" class="content-section coordinators">
+
+
+      <div class="section-heading">
+
+
+        <span>
+          // MECHANICAL DEPARTMENT CONTACTS
+        </span>
+
+
+        <h2>
+
+          MECH
+
+          <strong>
+            COMMAND CENTRE
+          </strong>
+
+        </h2>
+
+
+        <p>
+
+          Contact the Mechanical Engineering coordinators
+          for event registration, guidelines and venue assistance.
+
+        </p>
+
+      </div>
+
+
+
+      <div class="coord-grid">
+
+
+        <!-- STAFF COORDINATOR -->
+
+        <div class="coord-card glass">
+
+
+          <span>
+            STAFF CO-ORDINATOR
+          </span>
+
+
+          <h3>
+            Mr. S. Vijayakumar
+          </h3>
+
+
+          <p>
+            AP / MECH
+          </p>
+
+
+          <div>
+
+
+            <a href="tel:9629723720" class="coord-btn phone-btn">
+
+              ☎ 96297 23720
+
+            </a>
+
+
+            <a href="https://wa.me/919629723720" target="_blank" class="coord-btn wa-btn">
+
+              ◉ WHATSAPP
+
+            </a>
+
+
+          </div>
+
+        </div>
+
+
+
+        <!-- STUDENT COORDINATOR -->
+
+        <div class="coord-card glass">
+
+
+          <span>
+            STUDENT CO-ORDINATOR
+          </span>
+
+
+          <h3>
+            Mr. N. Jayanishanth
+          </h3>
+
+
+          <p>
+            IV / MECH
+          </p>
+
+
+          <div>
+
+
+            <a href="tel:7200116278" class="coord-btn phone-btn">
+
+              ☎ 72001 16278
+
+            </a>
+
+
+            <a href="https://wa.me/917200116278" target="_blank" class="coord-btn wa-btn">
+
+              ◉ WHATSAPP
+
+            </a>
+
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+
+
+  <!-- =========================
+       REGISTRATION MODAL
+  ========================== -->
+
+  <div class="modal-overlay" id="registerModal">
+
+
+    <div class="modal glass">
+
+
+      <button class="close" onclick="closeModals()">
+
+        ×
+
+      </button>
+
+
+      <span class="modal-tag">
+
+        // OFFICIAL REGISTRATION
+
+      </span>
+
+
+      <h2>
+
+        ACCESS
+
+        <strong>
+          GRANTED
+        </strong>
+
+      </h2>
+
+
+      <div class="modal-info dept-reg-info">
+        <p class="reg-fee-item">A common registration fee of ₹100 must be paid online through the website.</p>
+        <p class="reg-fee-item">Participants can register for any number of events.</p>
+        <p class="reg-fee-item">An additional ₹50 per event can be paid on the spot at the college during event registration.</p>
+      </div>
+
+      <div class="dept-reg-note">
+        <strong>Note:</strong> Please make sure you have checked the event details and rules carefully before registering. Once you have confirmed the details, proceed with the registration.
+      </div>
+
+      <a class="cyber-btn full" href="https://docs.google.com/forms/d/e/1FAIpQLSelFObbOOQgDELSd4EAMqx2kJ6O5w8RrCXwRyspILM8E3Cj1w/viewform" target="_blank" rel="noopener noreferrer">REGISTER</a>
+
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =========================
+       RULES MODAL
+  ========================== -->
+
+  <div class="modal-overlay" id="rulesModal">
+
+
+    <div class="modal glass">
+
+
+      <button class="close" onclick="closeModals()">
+
+        ×
+
+      </button>
+
+
+      <span class="modal-tag">
+        // OFFICIAL RULES &amp; GUIDELINES
+      </span>
+
+
+      <h2 id="rulesTitle">
+
+        EVENT DETAILS
+
+      </h2>
+
+
+      <div class="rule-meta">
+        <span id="rulesTime"></span>
+        <span id="rulesVenue"></span>
+        <span id="rulesTeam" style="display:none;"></span>
+      </div>
+
+      <div class="modal-rules-heading">// GUIDELINES</div>
+
+      <ul id="rulesBody"></ul>
+
+      <div class="modal-criteria-box" id="modalCriteriaBox" style="display:none;">
+        <span class="criteria-tag">// CHIEF GUEST &amp; JURY</span>
+        <p id="rulesCriteriaText"></p>
+      </div>
+
+      <div class="modal-prize-box" id="modalPrizeBox" style="display:none;">
+        <span class="prize-tag">// AWARDS &amp; PRIZES</span>
+        <p id="rulesPrizeText"></p>
+      </div>
+
+      <div class="modal-coord-box" id="modalCoordBox" style="display:none;">
+        <span class="coord-tag">// EVENT CO-ORDINATORS</span>
+        <p id="rulesCoordText"></p>
+      </div>
+
+      <button class="cyber-btn full" onclick="closeModals()">
+        ACKNOWLEDGE PROTOCOL
+      </button>
+
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =========================
+       SCRIPT
+  ========================== -->
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>

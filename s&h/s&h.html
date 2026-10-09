@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>S&H Arena | INFINITE TECHFEST' 26</title>
+  <meta name="description" content="Science and Humanities Department events at INFINITE TECHFEST' 26">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <canvas id="webgl-bg"></canvas>
+  <div class="scanlines"></div>
+  <div class="noise"></div>
+
+  <header class="hud-header">
+    <a href="../home page/index.html" class="brand glass">
+      <div class="brand-icon">◈</div>
+      <div>
+        <strong>R P SARATHY</strong>
+        <span>INSTITUTE OF TECHNOLOGY</span>
+        <small class="brand-sub">(AN AUTONOMOUS INSTITUTION)</small>
+      </div>
+    </a>
+
+    <nav class="main-nav glass">
+      <a href="../home page/index.html">HOME</a>
+      <a href="#events">EVENTS</a>
+      <a href="#coordinators">COORDINATORS</a>
+    </nav>
+
+    <div class="hud-status glass">
+      <span class="status-dot"></span>
+      <span>SYSTEM ONLINE</span>
+    </div>
+  </header>
+
+  <div class="dept-switcher glass">
+    <a href="../cse/cse.html">01 // CSE</a>
+    <a href="../ai&ds/aids.html">02 // AI & DS</a>
+    <a href="../it/it.html">03 // IT</a>
+    <a href="../ece/ece.html">04 // ECE</a>
+    <a href="../cyber/cyber.html">05 // CYBER</a>
+    <a href="../eee/eee.html">06 // EEE</a>
+    <a href="../mech/mech.html">07 // MECH</a>
+    <a class="active" href="#">08 // S & H</a>
+  </div>
+
+  <main id="top">
+    <section class="hero section-grid">
+      <div class="hero-content">
+        <a class="back-link" href="../home page/index.html">← RETURN TO HOME PAGE</a>
+        <div class="eyebrow"><span></span> DEPARTMENT ARENA 08 // S&H</div>
+
+        <h1>SCIENCE <em>&amp;</em><br><span>HUMANITIES</span></h1>
+        <p class="hero-description">
+           "Humanities without sciences are helpless, sciences without humanities are lifeless"
+        </p>
+
+        <div class="stats">
+          <div><b>04</b><small>CHAMPIONSHIP EVENTS</small></div>
+          <div><b>₹100</b><small>ENTRY FEE</small></div>
+          <div><b>₹50</b><small>EVENT FEE (PER EVENT)</small></div>
+        </div>
+
+        <button class="cyber-btn" onclick="openRegisterModal('S&H Department')">
+          <span>⚡ REGISTER FOR S&H </span><i>→</i>
+        </button>
+      </div>
+
+      <div class="hero-terminal glass">
+        <div class="terminal-top">
+          <span>S&H_CORE // LIVE FEED</span>
+          <span class="terminal-live">● LIVE</span>
+        </div>
+        <div class="terminal-body">
+          <div class="sh-atom-wrap" id="shAtomWrap">
+            <canvas id="shAtomCanvas"></canvas>
+            <div class="sh-core-badge">
+              <span class="pulse-beacon"></span>
+              <span>QUANTUM BOHR ATOM // n=3 SHELL</span>
+            </div>
+          </div>
+          <div class="terminal-lines">
+            <p><b>&gt;</b> initializing_quantum_matrix.py</p>
+            <p><b>&gt;</b> planck_constant: <span>6.626e-34 J·s</span></p>
+            <p><b>&gt;</b> orbital_energy: <span>n=3 [EXCITED]</span></p>
+            <p><b>&gt;</b> electron_spin: <span>+1/2 [QUANTIZED]</span></p>
+            <p><b>&gt;</b> science_scholars: <span id="counter">040+</span></p>
+            <p><b>&gt;</b> status: <span class="blink">QUANTUM EQUILIBRIUM_</span></p>
+          </div>
+        </div>
+        <div class="terminal-footer">
+          <span>DRAG / SCROLL TO EXPLORE</span>
+          <span>SYS.S&H.08</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="events" class="content-section">
+      <div class="section-heading">
+        <span>// COMPETITION TRACKS</span>
+        <h2>OFFICIAL <strong>EVENTS</strong></h2>
+        <p>Four championship competition modules organized by the Department of Science and Humanities.</p>
+      </div>
+
+      <div class="events-grid">
+        <!-- EVENT 01: PAPER PRESENTATION (PHYSICS) -->
+        <article class="event-card">
+          <div class="event-top">
+            <b>01</b>
+            <span>PHYSICS // PRESENTATION</span>
+          </div>
+          <h3>PAPER PRESENTATION <i>(PHYSICS)</i></h3>
+          <p>
+            Original research with meaningful review of a Physics-related topic. Abstract submission required before deadline (150-300 words).
+          </p>
+          <div class="meta">
+            <span>👥 1 - 3 MEMBERS</span>
+            <span>⌖ M415 SMART TV CLASS ROOM</span>
+            <span>◷ 8-10 MINS TALK + 2-3 MINS Q&amp;A</span>
+          </div>
+          <div class="actions">
+            <button
+              class="outline-btn"
+              onclick="openRulesModal(
+                'Paper Presentation (Physics)',
+                '8-10 mins talk + 2-3 mins Q&amp;A',
+                'M415 Smart Tv Class Room',
+                [
+                  'Original research with meaningful review of a Physics-related topic.',
+                  'Abstract submission required before deadline (150-300 words).',
+                  'Presentation time: 8-10 mins talk + 2-3 mins Q&amp;A.'
+                ],
+                'Content depth, original research, presentation clarity, and Q&amp;A accuracy.',
+                '<strong>Staff Coordinator:</strong><br>Dr. L. Gobinathan, Prof/Phy — <a href=\'tel:8190908999\'>81909 08999</a><br><br><strong>Student Coordinators:</strong><br>1. Mr. R. Sanjay, I IT<br>2. Mr. P. Santhoshkumar, I IT',
+                '1 - 3 members',
+                null
+              )">
+              VIEW RULES
+            </button>
+          </div>
+        </article>
+
+        <!-- EVENT 02: MATH PUZZLES & LOGIC - QUIZ (MATHS) -->
+        <article class="event-card">
+          <div class="event-top">
+            <b>02</b>
+            <span>LOGIC // MATHEMATICS</span>
+          </div>
+          <h3>MATH PUZZLES &amp; LOGIC - QUIZ <i>(MATHS)</i></h3>
+          <p>
+            Round 1 (Prelims): Logical Warm-up includes objective type puzzles. Round 2: Visual &amp; Graph puzzles. Round 3: Rapid Fire Round.
+          </p>
+          <div class="meta">
+            <span>👥 2 - 3 MEMBERS</span>
+            <span>⌖ DH2 SMART TV CLASS ROOM</span>
+            <span>∑ 3 ROUNDS</span>
+          </div>
+          <div class="actions">
+            <button
+              class="outline-btn"
+              onclick="openRulesModal(
+                'Math Puzzles &amp; Logic - Quiz (Maths)',
+                null,
+                'DH2 Smart Tv Class Room',
+                [
+                  'Round 1 (Prelims): Logical Warm-up includes objective type puzzles.',
+                  'Round 2 : Visual &amp; Graph puzzles includes picture based, Bridge, Coloring.',
+                  'Round 3 : Rapid Fire Round.',
+                  'Strict ban on search engines, smartwatches, and phones.'
+                ],
+                'Score in preliminary test and appropriate answers. Ban on search engines, smartwatches, and phones.',
+                '<strong>Staff Coordinator:</strong><br>Mr Rajesh Kumar, AP/Maths — <a href=\'tel:9994436995\'>99944 36995</a><br><br><strong>Student Coordinators:</strong><br>1. Mr. P. Sachin, I AI&amp;DS C Section<br>2. Mr. M. Pruthiviraj, I AI&amp;DS C Section',
+                '2 - 3 Members',
+                null
+              )">
+              VIEW RULES
+            </button>
+          </div>
+        </article>
+
+        <!-- EVENT 03: POSTER PRESENTATION (CHEMISTRY) -->
+        <article class="event-card">
+          <div class="event-top">
+            <b>03</b>
+            <span>CHEMISTRY // DISPLAY</span>
+          </div>
+          <h3>POSTER PRESENTATION <i>(CHEMISTRY)</i></h3>
+          <p>
+            Abstract submission required before deadline (250-300 words). Poster size A0 : 84.1*118.9 cm, Orientation: Portrait (Vertical).
+          </p>
+          <div class="meta">
+            <span>👥 1 - 3 MEMBERS</span>
+            <span>⌖ M413 SMART TV CLASS ROOM</span>
+            <span>◇ POSTER SIZE A0</span>
+          </div>
+          <div class="actions">
+            <button
+              class="outline-btn"
+              onclick="openRulesModal(
+                'Poster Presentation (Chemistry)',
+                null,
+                'M413 Smart Tv Class Room',
+                [
+                  'Abstract submission required before deadline (250-300 words).',
+                  'Poster size A0 : 84.1*118.9 cm, Orientation: Portrait (Vertical)'
+                ],
+                'Objectives of the title, Poster design, Presentation skills, Question &amp; Answer session.',
+                '<strong>Staff Coordinator:</strong><br>Dr. A. Bharathi, Prof/Che — <a href=\'tel:9790456302\'>97904 56302</a><br><br><strong>Student Coordinators:</strong><br>1. Mr. Sasikumar K, I AI&amp;DS C Section<br>2. Ms. Asma Sulthana, I AI&amp;DS A Section',
+                '1 - 3 Members',
+                'Dr. S. Gnanavel, Senior scientist, M/S Chemkovil, SIDCO, Mettur dam, Salem'
+              )">
+              VIEW RULES
+            </button>
+          </div>
+        </article>
+
+        <!-- EVENT 04: EXTEMPORE SPEECH (ENGLISH) -->
+        <article class="event-card">
+          <div class="event-top">
+            <b>04</b>
+            <span>ORATORY // ENGLISH</span>
+          </div>
+          <h3>EXTEMPORE SPEECH <i>(ENGLISH)</i></h3>
+          <p>
+            Speech with a clear introduction, body and conclusion. Speech to be audible to the audience and precise to the point.
+          </p>
+          <div class="meta">
+            <span>👥 1 MEMBER</span>
+            <span>⌖ M414 SMART TV CLASS ROOM</span>
+            <span>▣ ENGLISH ORATORY</span>
+          </div>
+          <div class="actions">
+            <button
+              class="outline-btn"
+              onclick="openRulesModal(
+                'Extempore Speech (English)',
+                null,
+                'M414 Smart Tv Class Room',
+                [
+                  'Speech with a clear introduction, body and conclusion.',
+                  'Speech to be audible to the audience and precise to the point.'
+                ],
+                'Content, fluency, pronunciation, voice modulation, body language &amp; time management',
+                '<strong>Staff Coordinator:</strong><br>Dr. K. Jeeva, AP/Eng — <a href=\'tel:9943492961\'>99434 92961</a><br><br><strong>Student Coordinators:</strong><br>1. Mr. Naveenkumar M, I CSE B Section<br>2. Ms. Jhoshree V, I CSE B Section',
+                '1 Member',
+                'JCI. Senator. A.S. Geetha, National Trainer, JCI, India'
+              )">
+              VIEW RULES
+            </button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- COORDINATORS -->
+    <section id="coordinators" class="content-section coordinators">
+      <div class="section-heading">
+        <span>// DEPARTMENT CONTACTS</span>
+        <h2>S&H <strong>COMMAND CENTRE</strong></h2>
+        <p>Contact the Department of Science &amp; Humanities coordinators for event guidelines and registration assistance.</p>
+      </div>
+
+      <div class="coord-grid">
+        <!-- STAFF COORDINATOR -->
+        <div class="coord-card glass">
+          <span>STAFF CO-ORDINATOR</span>
+          <h3>Dr. K. Saranya</h3>
+          <p>Prof / Maths — Dept of S&H</p>
+          <div>
+            <a href="tel:9789158113" class="coord-btn phone-btn">☎ 97891 58113</a>
+            <a href="https://wa.me/919789158113" target="_blank" class="coord-btn wa-btn">◉ WHATSAPP</a>
+          </div>
+        </div>
+
+        <!-- STUDENT COORDINATOR -->
+        <div class="coord-card glass">
+          <span>STUDENT CO-ORDINATOR</span>
+          <h3>Mr. Shaher</h3>
+          <p>I CSE D Section — Dept of S&H</p>
+          <div>
+            <a href="tel:7418119675" class="coord-btn phone-btn">☎ 74181 19675</a>
+            <a href="https://wa.me/917418119675" target="_blank" class="coord-btn wa-btn">◉ WHATSAPP</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-overlay" id="registerModal">
+    <div class="modal glass">
+      <button class="close" onclick="closeModals()">×</button>
+      <span class="modal-tag">// OFFICIAL REGISTRATION</span>
+      <h2>ACCESS <strong>GRANTED</strong></h2>
+      <div class="modal-info dept-reg-info">
+        <p class="reg-fee-item">A common registration fee of ₹100 must be paid online through the website.</p>
+        <p class="reg-fee-item">Participants can register for any number of events.</p>
+        <p class="reg-fee-item">An additional ₹50 per event can be paid on the spot at the college during event registration.</p>
+      </div>
+
+      <div class="dept-reg-note">
+        <strong>Note:</strong> Please make sure you have checked the event details and rules carefully before registering. Once you have confirmed the details, proceed with the registration.
+      </div>
+
+      <a class="cyber-btn full" href="https://docs.google.com/forms/d/e/1FAIpQLSf9dBGlKaEJABx8M_-3qA2oBsL_M0sQzM5CnIKF54ASCpDs_w/viewform" target="_blank" rel="noopener noreferrer">REGISTER</a>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="rulesModal">
+    <div class="modal glass">
+      <button class="close" onclick="closeModals()">×</button>
+      <span class="modal-tag">// OFFICIAL RULES &amp; GUIDELINES</span>
+      <h2 id="rulesTitle">EVENT DETAILS</h2>
+      <div class="rule-meta">
+        <span id="rulesVenue"></span>
+        <span id="rulesTeam" style="display:none;"></span>
+        <span id="rulesTime" style="display:none;"></span>
+      </div>
+
+      <div class="modal-rules-heading">// GUIDELINES</div>
+      <ul id="rulesBody"></ul>
+
+      <div class="modal-criteria-box" id="modalCriteriaBox" style="display:none;">
+        <span class="criteria-tag">// JUDGING CRITERIA / REQUIREMENTS</span>
+        <p id="rulesCriteriaText"></p>
+      </div>
+
+      <div class="modal-prize-box" id="modalSponsorBox" style="display:none;">
+        <span class="prize-tag">// SPONSORS FROM INDUSTRY</span>
+        <p id="rulesSponsorText"></p>
+      </div>
+
+      <div class="modal-coord-box" id="modalCoordBox" style="display:none;">
+        <span class="coord-tag">// EVENT COORDINATORS</span>
+        <p id="rulesCoordText"></p>
+      </div>
+
+      <button class="cyber-btn full" onclick="closeModals()">ACKNOWLEDGE PROTOCOL</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

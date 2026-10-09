@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSE Arena | INFINITE TECHFEST' 26</title>
+  <meta name="description" content="CSE Department events at INFINITE TECHFEST' 26">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <canvas id="webgl-bg"></canvas>
+  <div class="scanlines"></div>
+  <div class="noise"></div>
+
+  <header class="hud-header">
+    <a href="../home page/index.html" class="brand glass">
+      <div class="brand-icon">◈</div>
+      <div>
+        <strong>R P SARATHY</strong>
+        <span>INSTITUTE OF TECHNOLOGY</span>
+        <small class="brand-sub">(AN AUTONOMOUS INSTITUTION)</small>
+      </div>
+    </a>
+
+    <nav class="main-nav glass">
+      <a href="../home page/index.html">HOME</a>
+      <a href="#events">EVENTS</a>
+      <a href="#coordinators">COORDINATORS</a>
+    </nav>
+
+    <div class="hud-status glass">
+      <span class="status-dot"></span>
+      <span>SYSTEM ONLINE</span>
+    </div>
+  </header>
+
+  <div class="dept-switcher glass">
+    <a class="active" href="#">01 // CSE</a>
+    <a href="../ai&ds/aids.html">02 // AI & DS</a>
+    <a href="../it/it.html">03 // IT</a>
+    <a href="../ece/ece.html">04 // ECE</a>
+    <a href="../cyber/cyber.html">05 // CYBER</a>
+    <a href="../eee/eee.html">06 // EEE</a>
+    <a href="../mech/mech.html">07 // MECH</a>
+    <a href="../s&h/s&h.html">08 // S & H</a>
+  </div>
+
+  <main id="top">
+    <section class="hero section-grid">
+      <div class="hero-content">
+        <a class="back-link" href="../home page/index.html">← RETURN TO HOME PAGE</a>
+        <div class="eyebrow"><span></span> DEPARTMENT ARENA 01 // CSE</div>
+
+        <h1>COMPUTER SCIENCE <em>&amp;</em><br><span>ENGINEERING</span></h1>
+
+        <p class="hero-description">
+          Unleash algorithmic precision, cutting-edge software architecture,
+          innovative mobile applications and high-speed coding challenges.
+        </p>
+
+        <div class="stats">
+          <div><b>06</b><small>CHAMPIONSHIP EVENTS</small></div>
+          <div><b>₹100</b><small>ENTRY FEE</small></div>
+          <div><b>₹50</b><small>EVENT FEE (PER EVENT)</small></div>
+        </div>
+
+        <button class="cyber-btn" onclick="openRegisterModal('CSE Department')">
+          <span>⚡ REGISTER FOR CSE</span><i>→</i>
+        </button>
+      </div>
+
+      <div class="hero-terminal glass">
+        <div class="terminal-top">
+          <span>CSE_CORE // LIVE FEED</span>
+          <span class="terminal-live">● LIVE</span>
+        </div>
+        <div class="terminal-body">
+          <div class="cse-tesseract-wrap" id="cseTesseractWrap">
+            <canvas id="tesseractCanvas"></canvas>
+            <div class="cse-core-badge">
+              <span class="pulse-beacon"></span>
+              <span>4D HYPERCUBE // ALGORITHMIC CORE</span>
+            </div>
+          </div>
+          <div class="terminal-lines">
+            <p><b>&gt;</b> initializing_algorithmic_core.cpp</p>
+            <p><b>&gt;</b> compiler_runtime: <span>LLVM -O3 [ACTIVE]</span></p>
+            <p><b>&gt;</b> memory_complexity: <span>O(1) [OPTIMAL]</span></p>
+            <p><b>&gt;</b> code_execution_engine: <span>READY</span></p>
+            <p><b>&gt;</b> cse_programmers: <span id="counter">040+</span></p>
+            <p><b>&gt;</b> status: <span class="blink">CODE MATRIX ACTIVE_</span></p>
+          </div>
+        </div>
+        <div class="terminal-footer">
+          <span>DRAG / SCROLL TO EXPLORE</span>
+          <span>SYS.CSE.01</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="events" class="content-section">
+      <div class="section-heading">
+        <span>// COMPETITION TRACKS</span>
+        <h2>OFFICIAL <strong>EVENTS</strong></h2>
+        <p>Six high-intensity competition modules engineered by the Department of Computer Science &amp; Engineering.</p>
+      </div>
+
+      <div class="events-grid">
+        <!-- EVENT 01: PAPER PRESENTATION -->
+        <article class="event-card">
+          <div class="event-top">
+            <b>01</b>
+            <span>TECHNICAL // PRESENTATION</span>
+          </div>
+          <h3>PAPER PRESENTATION <i>(TECHNICAL)</i></h3>
+          <p>
+            Abstract submission required before the deadline (250–300 words). Topics must focus on emerging technologies (AI, ML, Cybersecurity, IoT, Cloud).
+          </p>
+          <div class="meta">
+            <span>👥 1–3 MEMBERS</span>
+            <span>⌖ M421 SMART TV CLASS ROOM</span>
+            <span>◷ 10:30 AM – 1:00 PM</span>
+          </div>
+
+          <div class="actions">
+            <button
+              class="outline-btn"
+              onclick="openRulesModal(
+                'Paper Presentation',
+                '10:30 AM – 1:00 PM (Duration: 2 hr 30 min)',
+                'M421 Smart TV Class Room',
+                [
+                  'Abstract submission required before the deadline (250–300 words).',
+                  'Presentation time: 8–10 minutes, followed by 2–3 minutes of Q&amp;A.',
+                  'Topics must focus on emerging technologies (AI, ML, Cybersecurity, IoT, Cloud).'
+                ],
+                'Content depth, original research, presentation clarity and Q&amp;A accuracy.',
+                '<strong>Staff Coordinator:</strong><br>Mr. S.Sasikala, AP/CSE — <a href=\'tel:8344933555\'>83449 33555</a><br><br><strong>Student Coordinators:</strong><br>1. Mr. S. Poovarasan, II-CSE C<br>2. Selvi V. Kiruba, IV-CSE A',
+                '1 – 3 members',
+                'Mr. Raja M<br>Full Stack Developer &amp; AI Specialist, Lax360 Pvt Ltd, Salem'
+              )">
+              VIEW RULES
+            </button>
+          </div>
+        </article>
+
+        <!-- EVENT 02: HACKATHON -->
+        <article class="event-card">
+          <div class="event-top">
+            <b>02</b>
+            <span>HACKATHON // SPRINT</span>
+          </div>
+          <h3>HACKATHON</h3>
+          <p>
+            Problem statements are pre-announced or released at the start. All code must be written during the event duration. Participants must bring their own hardware/laptops.
+          </p>
+          <div class="meta">
+            <span>👥 2–4 MEMBERS</span>
+            <span>⌖ M422 SMART TV CLASS ROOM</span>
+            <span>◷ 10:30 AM – 1:00 PM</span>
+          </div>
+
+          <div class="actions">
+            <button
+              class="outline-btn"
+              onclick="openRulesModal(
+                'Hackathon',
+                '10:30 AM – 1:00 PM (Duration: 2 hr 30 min)',
+                'M422 Smart TV Class Room',
+                [
+                  'Problem statements are pre-announced or released at the start.',
+                  'All code must be written during the event duration.',
+                  'Pre-existing complete projects or templates are strictly prohibited.',
+                  'Participants must bring their own hardware/laptops.'
+                ],
+                'Working prototype, innovation, code structure, problem relevance and live demonstration.',
+                '<strong>Staff Coordinator:</strong><br>Mrs. P. Menaka, AP/CSE — <a href=\'tel:8012432348\'>80124 32348</a><br><br><strong>Student Coordinators:</strong><br>1. Mr. Bhuvankumar, IV-CSE A<br>2. Mr. S. Venkatajalapathi, IV-CSE B',
+                '2 – 4 members',
+                'Mr. Chitharanjan<br>Cloud Developer, Gateway Software Solutions, Erode'
+              )">
+              VIEW RULES
+            </button>
+          </div>
+        </article>
+
+        <!-- EVENT 03: PROJECT EXPO -->
+        <article class="event-card">
+          <div class="event-top">
+            <b>03</b>
+            <span>PROJECT // EXPO</span>
+          </div>
+          <h3>PROJECT EXPO <i>(MOBILE APP DEVELOPMENT)</i></h3>
+          <p>
+            Projects must be working mobile applications (Android/iOS/Flutter/React Native). Architecture diagram must be displayed.
+          </p>
+          <div class="meta">
+            <span>👥 1–4 MEMBERS</span>
+            <span>⌖ GAMMA LAB</span>
+            <span>◷ 10:30 AM – 1:00 PM</span>
+          </div>
+
+          <div class="actions">
+            <button
+              class="outline-btn"
+              onclick="openRulesModal(
+                'Project Expo (Mobile App Development)',
+                '10:30 AM – 1:00 PM (Duration: 2 hr 30 min)',
+                'Gamma Lab',
+                [
+                  'Projects must be working mobile applications (Android/iOS/Flutter/React Native).',
+                  'Architecture diagram must be displayed.'
+                ],
+                'UI/UX aesthetics, backend integration, real-world utility and system performance.',
+                '<strong>Staff Coordinator:</strong><br>Mr.Prakashkumar, HOD/CSE — <a href=\'tel:9600554305\'>96005 54305</a><br><br><strong>Student Coordinators:</strong><br>1. Mr. JK. Naren Karthik, III-CSE A<br>2. Mr. A.T. Dharsan, II-CSE A',
+                '1 – 4 members',
+                'Mr. R. Gokul<br>Mobile App Developer, Zenth Tech Software Solutions, Dharmapuri'
+              )">
+              VIEW RULES
+            </button>
+          </div>
+        </article>
+
+        <!-- EVENT 04: SNAP WITH AI -->
+        <article class="event-card">
+          <div class="event-top">
+            <b>04</b>
+            <span>AI // POSTER MAKING</span>
+          </div>
+          <h3>SNAP WITH AI <i>(POSTER MAKING)</i></h3>
+          <p>
+            Create high-impact visual posters using AI image generators (Midjourney, DALL-E, Leonardo AI, Canva AI). Prompts used must be logged and submitted.
+          </p>
+          <div class="meta">
+            <span>👥 1–2 MEMBERS</span>
+            <span>⌖ EPSILON LAB</span>
+            <span>◷ 10:30 AM – 12:30 PM</span>
+          </div>
+
+          <div class="actions">
+            <button
+              class="outline-btn"
+              onclick="openRulesModal(
+                'Snap with AI (Poster Making)',
+                '10:30 AM – 12:30 PM (Duration: 2 hr)',
+                'Epsilon Lab',
+                [
+                  'Create high-impact visual posters using AI image generators (Midjourney, DALL-E, Leonardo AI, Canva AI).',
+                  'Prompts used must be logged and submitted alongside the final visual output.',
+                  'Must include a tagline or concise explanatory text.'
+                ],
+                'Visual creativity, prompt engineering capability, theme relevance and alignment.',
+                '<strong>Staff Coordinator:</strong><br>Mrs. Saranya, AP/CSE — <a href=\'tel:9994533630\'>99945 33630</a><br><br><strong>Student Coordinators:</strong><br>1. Mr. Surendar, III-CSE B<br>2. Mr. Arshad Adam, III-CSE A',
+                '1 – 2 members',
+                'Mr. R. Yuvaraju<br>Business Development Manager, RTECH Solution, Salem'
+              )">
+              VIEW RULES
+            </button>
+          </div>
+        </article>
+
+        <!-- EVENT 05: CYBER HUNT -->
+        <article class="event-card">
+          <div class="event-top">
+            <b>05</b>
+            <span>TECH // QUIZ</span>
+          </div>
+          <h3>CYBER HUNT <i>(TECHNICAL QUIZ)</i></h3>
+          <p>
+            Round 1 (Prelims): Time-bound MCQs on Networking, OS, Cryptography and Security. Round 2 (Finals): Capture-The-Flag (CTF) challenges and log analysis.
+          </p>
+          <div class="meta">
+            <span>👥 1–2 MEMBERS</span>
+            <span>⌖ EPSILON LAB</span>
+            <span>◷ 2:00 PM – 4:00 PM</span>
+          </div>
+
+          <div class="actions">
+            <button
+              class="outline-btn"
+              onclick="openRulesModal(
+                'Cyber Hunt (Technical Quiz)',
+                '2:00 PM – 4:00 PM (Duration: 2 hr)',
+                'Epsilon Lab',
+                [
+                  'Round 1 (Prelims): Time-bound MCQs on Networking, OS, Cryptography and Security.',
+                  'Round 2 (Finals): Capture-The-Flag (CTF) challenges and log analysis.',
+                  'Strict ban on search engines, smartwatches and phones.'
+                ],
+                'Score in the preliminary test and speed/accuracy in CTF challenges.',
+                '<strong>Staff Coordinator:</strong><br>Mrs. S. Malathi, AP/CSE — <a href=\'tel:9952354167\'>99523 54167</a><br><br><strong>Student Coordinators:</strong><br>1. Selvi M. Vijay Sakthi, II-CSE D<br>2. Selvi S. Srivarshini, IV-CSE B',
+                '1 – 2 members',
+                'Lightcast India Pvt. Ltd, Dharmapuri'
+              )">
+              VIEW RULES
+            </button>
+          </div>
+        </article>
+
+        <!-- EVENT 06: AI PROMPT BATTLE -->
+        <article class="event-card">
+          <div class="event-top">
+            <b>06</b>
+            <span>PROMPT // BATTLE</span>
+          </div>
+          <h3>AI PROMPT BATTLE <i>(USING CLAUDE AI)</i></h3>
+          <p>
+            Identical target output requirements are provided to all contestants. Competitors write and refine prompts using Claude AI within the time limit. Single-user challenge.
+          </p>
+          <div class="meta">
+            <span>👤 SINGLE PARTICIPANT</span>
+            <span>⌖ GAMMA LAB</span>
+            <span>◷ 2:00 PM – 3:30 PM</span>
+          </div>
+
+          <div class="actions">
+            <button
+              class="outline-btn"
+              onclick="openRulesModal(
+                'AI Prompt Battle (Using Claude AI)',
+                '2:00 PM – 3:30 PM (Duration: 1 hr 30 min)',
+                'Gamma Lab',
+                [
+                  'Identical target output requirements are provided to all contestants.',
+                  'Competitors write and refine prompts using Claude AI within the time limit.',
+                  'Single-user challenge.'
+                ],
+                'Prompt precision, efficiency (minimum turns taken) and output accuracy.',
+                '<strong>Staff Coordinator:</strong><br>Mrs. Jayapriya, AP/CSE — <a href=\'tel:8148323637\'>81483 23637</a><br><br><strong>Student Coordinators:</strong><br>1. Selvi R. Dikshasri, II-CSE A<br>2. Selvi Suvithra, III-CSE B',
+                'Single participant',
+                'Selvi Pavalakurunji T<br>Digital Marketing Trainer, Logical Support and Solutions Pvt Ltd, Salem'
+              )">
+              VIEW RULES
+            </button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="coordinators" class="content-section coordinators">
+      <div class="section-heading">
+        <span>// DEPARTMENT CONTACTS</span>
+        <h2>CSE <strong>COMMAND CENTRE</strong></h2>
+        <p>Contact the department coordinators for submissions, guidelines and venue assistance.</p>
+      </div>
+
+      <div class="coord-grid">
+        <div class="coord-card glass">
+          <span>STAFF CO-ORDINATOR</span>
+          <h3>Mr. M. Ramesh</h3>
+          <p>Assistant Professor / Dept of CSE</p>
+          <div><a href="tel:9500535551" class="coord-btn phone-btn">☎ 95005 35551</a><a href="https://wa.me/919500535551" target="_blank" class="coord-btn wa-btn">◉ WHATSAPP</a></div>
+        </div>
+        <div class="coord-card glass">
+          <span>STUDENT CO-ORDINATOR</span>
+          <h3>Mr. P. Bhuvankumar</h3>
+          <p>Final Year (IV / CSE)</p>
+          <div><a href="tel:9342232411" class="coord-btn phone-btn">☎ 93422 32411</a><a href="https://wa.me/919342232411" target="_blank" class="coord-btn wa-btn">◉ WHATSAPP</a></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-overlay" id="registerModal">
+    <div class="modal glass">
+      <button class="close" onclick="closeModals()">×</button>
+      <span class="modal-tag">// OFFICIAL REGISTRATION</span>
+      <h2>ACCESS <strong>GRANTED</strong></h2>
+      <div class="modal-info cse-reg-info">
+        <p class="reg-fee-item">A common registration fee of ₹100 must be paid online through the website.</p>
+        <p class="reg-fee-item">Participants can register for any number of events.</p>
+        <p class="reg-fee-item">An additional ₹50 per event can be paid on the spot at the college during event registration.</p>
+      </div>
+
+      <div class="cse-reg-note">
+        <strong>Note:</strong> Please make sure you have checked the event details and rules carefully before registering. Once you have confirmed the details, proceed with the registration.
+      </div>
+
+      <a class="cyber-btn full" href="https://docs.google.com/forms/d/e/1FAIpQLSd0g8BMd4hoMpfxDQ1JwcttJ8opa9qQ61PKyU7A1q5LmV9XWg/viewform" target="_blank" rel="noopener noreferrer">REGISTER</a>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="rulesModal">
+    <div class="modal glass">
+      <button class="close" onclick="closeModals()">×</button>
+      <span class="modal-tag">// OFFICIAL RULES &amp; GUIDELINES</span>
+      <h2 id="rulesTitle">EVENT DETAILS</h2>
+      <div class="rule-meta">
+        <span id="rulesTime"></span>
+        <span id="rulesVenue"></span>
+        <span id="rulesTeam" style="display:none;"></span>
+      </div>
+
+      <div class="modal-rules-heading">// GUIDELINES</div>
+      <ul id="rulesBody"></ul>
+
+      <div class="modal-criteria-box" id="modalCriteriaBox" style="display:none;">
+        <span class="criteria-tag">// JUDGING CRITERIA</span>
+        <p id="rulesCriteriaText"></p>
+      </div>
+
+      <div class="modal-prize-box" id="modalSponsorBox" style="display:none;">
+        <span class="prize-tag">// RESOURCE PERSON &amp; SPONSOR</span>
+        <p id="rulesSponsorText"></p>
+      </div>
+
+      <div class="modal-coord-box" id="modalCoordBox" style="display:none;">
+        <span class="coord-tag">// EVENT COORDINATORS</span>
+        <p id="rulesCoordText"></p>
+      </div>
+
+      <button class="cyber-btn full" onclick="closeModals()">ACKNOWLEDGE PROTOCOL</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

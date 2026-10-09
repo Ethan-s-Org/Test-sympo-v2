@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ECE Arena | INFINITE TECHFEST'26</title>
+
+  <meta name="description"
+        content="Electronics and Communication Engineering events at INFINITE TECHFEST'26">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ================= BACKGROUND ================= -->
+
+  <canvas id="webgl-bg"></canvas>
+  <div class="scanlines"></div>
+  <div class="noise"></div>
+
+
+  <!-- ================= HEADER ================= -->
+
+  <header class="hud-header">
+
+    <a href="../home page/index.html" class="brand glass">
+
+      <div class="brand-icon">◈</div>
+
+      <div>
+        <strong>R P SARATHY</strong>
+        <span>INSTITUTE OF TECHNOLOGY</span>
+        <small class="brand-sub">(AN AUTONOMOUS INSTITUTION)</small>
+      </div>
+
+    </a>
+
+
+    <nav class="main-nav glass">
+
+      <a href="../home page/index.html">HOME</a>
+      <a href="#events">EVENTS</a>
+      <a href="#coordinators">COORDINATORS</a>
+
+    </nav>
+
+
+    <div class="hud-status glass">
+
+      <span class="status-dot"></span>
+      <span>SYSTEM ONLINE</span>
+
+    </div>
+
+  </header>
+
+
+  <!-- ================= DEPARTMENT SWITCHER ================= -->
+
+  <div class="dept-switcher glass">
+
+    <a href="../cse/cse.html">01 // CSE</a>
+    <a href="../ai&ds/aids.html">02 // AI & DS</a>
+    <a href="../it/it.html">03 // IT</a>
+    <a class="active" href="#">04 // ECE</a>
+    <a href="../cyber/cyber.html">05 // CYBER</a>
+    <a href="../eee/eee.html">06 // EEE</a>
+    <a href="../mech/mech.html">07 // MECH</a>
+    <a href="../s&h/s&h.html">08 // S & H</a>
+
+  </div>
+
+
+  <main id="top">
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero section-grid">
+
+      <div class="hero-content">
+
+        <a class="back-link" href="../home page/index.html">
+          ← RETURN TO HOME PAGE
+        </a>
+
+
+        <div class="eyebrow">
+          <span></span>
+          DEPARTMENT ARENA 04 // ECE
+        </div>
+
+
+        <h1>
+          ELECTRONICS &<br>
+          <span>COMMUNICATION ENGINEERING</span>
+        </h1>
+
+
+        <p class="hero-description">
+          Explore electronics, communication, embedded systems,
+          circuit debugging, technical innovation and creative
+          engineering challenges at INFINITE TECHFEST'26.
+        </p>
+
+
+        <div class="stats">
+
+          <div>
+            <b>06</b>
+            <small>CHAMPIONSHIP EVENTS</small>
+          </div>
+
+          <div>
+            <b>₹100</b>
+            <small>ENTRY FEE</small>
+          </div>
+
+          <div>
+            <b>₹50</b>
+            <small>EVENT FEE (PER EVENT)</small>
+          </div>
+
+        </div>
+
+
+        <button class="cyber-btn"
+                onclick="openRegisterModal('ECE Department')">
+
+          <span>⚡ REGISTER FOR ECE</span>
+          <i>→</i>
+
+        </button>
+
+      </div>
+
+
+      <!-- ================= TERMINAL ================= -->
+
+      <div class="hero-terminal glass">
+
+        <div class="terminal-top">
+
+          <span>ECE_CORE // LIVE FEED</span>
+
+          <span class="terminal-live">
+            ● LIVE
+          </span>
+
+        </div>
+
+
+        <div class="terminal-body">
+
+          <div class="ece-chip-wrap" id="eceChipWrap">
+            <canvas id="eceChipCanvas"></canvas>
+            <div class="ece-core-badge">
+              <span class="pulse-beacon"></span>
+              <span>VLSI SILICON CORE // 5.8 GHz RF</span>
+            </div>
+          </div>
+
+          <div class="terminal-lines">
+            <p><b>&gt;</b> initializing_firmware.bin</p>
+            <p><b>&gt;</b> clock_frequency: <span>5.8 GHz [LOCKED]</span></p>
+            <p><b>&gt;</b> rf_transceiver: <span>TX/RX ACTIVE</span></p>
+            <p><b>&gt;</b> vlsi_bus_matrix: <span>SYNCHRONIZED</span></p>
+            <p><b>&gt;</b> ece_engineers: <span id="counter">040+</span></p>
+            <p><b>&gt;</b> status: <span class="blink">CIRCUITS ENERGIZED_</span></p>
+          </div>
+
+        </div>
+
+
+        <div class="terminal-footer">
+
+          <span>
+            DRAG / SCROLL TO EXPLORE
+          </span>
+
+          <span>
+            SYS.ECE.04
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= EVENTS ================= -->
+
+    <section id="events" class="content-section">
+
+      <div class="section-heading">
+
+        <span>
+          // ECE COMPETITION TRACKS
+        </span>
+
+        <h2>
+          OFFICIAL <strong>EVENTS</strong>
+        </h2>
+
+        <p>
+          Six exciting technical events organized by the
+          Department of Electronics &amp; Communication Engineering.
+        </p>
+
+      </div>
+
+
+      <div class="events-grid">
+
+        <!-- EVENT 01: PAPER PRESENTATION -->
+        <article class="event-card">
+          <div class="event-top">
+            <b>01</b>
+            <span>TECHNICAL // PRESENTATION</span>
+          </div>
+          <h3>PAPER PRESENTATION</h3>
+          <p>
+            Present original research papers and technical concepts on emerging areas of Electronics and Communication Engineering.
+          </p>
+          <div class="meta">
+            <span>👥 MAXIMUM 2–3 MEMBERS</span>
+            <span>⌖ M412</span>
+            <span>◷ 10:00 AM – 12:30 PM</span>
+          </div>
+          <div class="actions">
+            <button class="outline-btn"
+              onclick="openRulesModal(
+                'Paper Presentation',
+                '10:00 am – 12:30 pm',
+                'M412',
+                [
+                  'Individual or team participation, maximum 2–3 members.',
+                  'Each participant/team can present one paper.',
+                  'Topics should relate to emerging areas of ECE, such as:<ul class=\'modal-sublist\'><li>Communication &amp; 5G/6G</li><li>Embedded Systems &amp; IoT</li><li>VLSI &amp; Semiconductor Technology</li><li>AI/ML &amp; Signal Processing</li><li>RF, Microwave &amp; Antennas</li><li>Robotics &amp; Biomedical Electronics</li></ul>',
+                  'Presentation: 8–10 minutes',
+                  'Q&amp;A: 2–3 minutes'
+                ],
+                null,
+                '<strong>Staff Co-ordinator:</strong><br>Mrs. N.Rupavathi &amp; Mr.T.Thirunavukkarasu<br><br><strong>Student Co-ordinator:</strong><br>Monika V - IV<br>Megapriyan D III-A<br>Jeevanantham S – II-A<br>Thilaga R – II-B',
+                'Maximum 2–3 members'
+              )">
+              VIEW RULES
+            </button>
+          </div>
+        </article>
+
+        <!-- EVENT 02: PROJECT EXPO -->
+        <article class="event-card">
+          <div class="event-top">
+            <b>02</b>
+            <span>PROJECT // EXPO</span>
+          </div>
+          <h3>PROJECT EXPO</h3>
+          <p>
+            Demonstrate innovative practical ECE applications, IoT systems, automation prototypes, and hardware engineering projects.
+          </p>
+          <div class="meta">
+            <span>👥 MAXIMUM 2–4 MEMBERS</span>
+            <span>⌖ LAMDA LAB</span>
+            <span>◷ 10:00 AM – 11:30 AM</span>
+          </div>
+          <div class="actions">
+            <button class="outline-btn"
+              onclick="openRulesModal(
+                'Project Expo',
+                '10:00 am – 11:30 am',
+                'LAMDA Lab',
+                [
+                  'Individual or team participation, maximum 2–4 members.',
+                  'Projects should demonstrate a practical ECE application.',
+                  'Areas may include IoT, Embedded Systems, Automation, Robotics and Communication.',
+                  'Demo: 8–10 minutes',
+                  'Q&amp;A: 2–3 minutes'
+                ],
+                null,
+                '<strong>Staff Co-ordinator:</strong><br>Mr. S. Sivaprakash &amp; Dr. S. Sabarinathan<br><br><strong>Student Co-ordinator:</strong><br>Veereshwaran M - IV<br>Ashma K III-B<br>Nirmalraj K - II-B<br>Gayatri V -II-A',
+                'Maximum 2–4 members'
+              )">
+              VIEW RULES
+            </button>
+          </div>
+        </article>
+
+        <!-- EVENT 03: CIRCUIT DEBUGGING -->
+        <article class="event-card">
+          <div class="event-top">
+            <b>03</b>
+            <span>CIRCUIT // DEBUGGING</span>
+          </div>
+          <h3>CIRCUIT DEBUGGING</h3>
+          <p>
+            Identify and rectify faults in given electronic circuits, testing core knowledge of electronic components and troubleshooting speed.
+          </p>
+          <div class="meta">
+            <span>👥 MAXIMUM 2 MEMBERS</span>
+            <span>⌖ LH-15</span>
+            <span>◷ 11:00 AM – 12:00 PM</span>
+          </div>
+          <div class="actions">
+            <button class="outline-btn"
+              onclick="openRulesModal(
+                'Circuit Debugging',
+                '11:00 am – 12:00 pm',
+                'LH-15',
+                [
+                  'Individual or team participation, maximum 2 members.',
+                  'Identify and rectify faults in the given electronic circuit.',
+                  'Basic knowledge of electronic components and circuits is required.',
+                  'Time: 30–45 minutes'
+                ],
+                'Accuracy and completion time',
+                '<strong>Staff Co-ordinator:</strong><br>Mr. V. Govindaraj &amp; Mrs.S.Manjula<br><br><strong>Student Co-ordinator:</strong><br>Vaishnavi S- IV<br>Kowshika G- III-A<br>Preethi K – III-B<br>Shamprakash K -II-B',
+                'Maximum 2 members'
+              )">
+              VIEW RULES
+            </button>
+          </div>
+        </article>
+
+        <!-- EVENT 04: DRONOVA -->
+        <article class="event-card">
+          <div class="event-top">
+            <b>04</b>
+            <span>DRONE // INNOVATION</span>
+          </div>
+          <h3>DRONOVA</h3>
+          <p>
+            Perform technical drone and UAV tasks demonstrating flight control, aerial stability, maneuvers, and safety protocols.
+          </p>
+          <div class="meta">
+            <span>👥 MAXIMUM 2–4 MEMBERS</span>
+            <span>⌖ AMPHI THEATRE (OR) ETA LAB</span>
+            <span>◷ 2:00 PM – 3:00 PM</span>
+          </div>
+          <div class="actions">
+            <button class="outline-btn"
+              onclick="openRulesModal(
+                'Dronova',
+                '2:00 pm- 3:00 pm',
+                'Amphi Theatre (OR) ETA Lab',
+                [
+                  'Individual or team participation, maximum 2–4 members.',
+                  'Teams will perform drone/UAV-based technical tasks.',
+                  'Knowledge of basic drone operation and safety is required.',
+                  'Time: As specified by the organizers'
+                ],
+                'Accuracy, control and task completion',
+                '<strong>Staff Co-ordinator:</strong><br>Mr.C.Devan &amp; Mr.G.Rajasekar<br><br><strong>Student Co-ordinator:</strong><br>Dhanush C – IV<br>Prakashraj.K III-B<br>Kavin Kumaran SS – II-A<br>Shashwath V L – II-B',
+                'Maximum 2–4 members'
+              )">
+              VIEW RULES
+            </button>
+          </div>
+        </article>
+
+        <!-- EVENT 05: TECH ESCAPE ROOM -->
+        <article class="event-card">
+          <div class="event-top">
+            <b>05</b>
+            <span>TACTICAL // ESCAPE QUEST</span>
+          </div>
+          <h3>TECH ESCAPE ROOM</h3>
+          <p>
+            Solve electronics and technology-based puzzles and challenges under time pressure to unlock stages and escape.
+          </p>
+          <div class="meta">
+            <span>👥 MAXIMUM 3–4 MEMBERS</span>
+            <span>⌖ LH 16</span>
+            <span>◷ 11:00 AM – 12:30 PM</span>
+          </div>
+          <div class="actions">
+            <button class="outline-btn"
+              onclick="openRulesModal(
+                'Tech Escape Room',
+                '11:00 am – 12:30 pm',
+                'LH 16',
+                [
+                  'Team participation, maximum 3–4 members.',
+                  'Solve electronics and technology-based puzzles and challenges.',
+                  'Teams must complete all tasks within the allotted time.',
+                  'Time: 30–45 minutes'
+                ],
+                'Accuracy, teamwork and completion time',
+                '<strong>Staff Co-ordinator:</strong><br>Mrs.S.Aruna Devi &amp; Ms.D.Angel<br><br><strong>Student Co-ordinator:</strong><br>Vigneshwaran S - IV<br>Anbumani D – III-A<br>Shalini T – III-B<br>Kaviya M – II-A',
+                'Maximum 3–4 members'
+              )">
+              VIEW RULES
+            </button>
+          </div>
+        </article>
+
+        <!-- EVENT 06: ECE HACKATHON -->
+        <article class="event-card">
+          <div class="event-top">
+            <b>06</b>
+            <span>HARDWARE // HACKATHON</span>
+          </div>
+          <h3>ECE HACKATHON</h3>
+          <p>
+            Develop an innovative solution to the given ECE-based problem statement across Embedded Systems, IoT, AI, Automation or Communication.
+          </p>
+          <div class="meta">
+            <span>👥 MAXIMUM 3–4 MEMBERS</span>
+            <span>⌖ LH 17</span>
+            <span>◷ 2:00 PM – 3:00 PM</span>
+          </div>
+          <div class="actions">
+            <button class="outline-btn"
+              onclick="openRulesModal(
+                'ECE Hackathon',
+                '2:00 pm- 3:00 pm',
+                'LH 17',
+                [
+                  'Team participation, maximum 3–4 members.',
+                  'Develop an innovative solution to the given ECE-based problem statement.',
+                  'Projects may involve Embedded Systems, IoT, AI, Automation or Communication.',
+                  'Development: As specified by the organizers'
+                ],
+                'Innovation, functionality and presentation',
+                '<strong>Staff Co-ordinator:</strong><br>Mrs.M.Bavithra &amp; Mrs.K.Pradeepa<br><br><strong>Student Co-ordinator:</strong><br>Priyadharshini S - IV<br>Harish K – III-A<br>Boomika S – II- A<br>Santhosh R -II-B',
+                'Maximum 3–4 members'
+              )">
+              VIEW RULES
+            </button>
+          </div>
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= COORDINATORS ================= -->
+
+    <section id="coordinators"
+             class="content-section coordinators">
+
+      <div class="section-heading">
+
+        <span>
+          // ECE DEPARTMENT CONTACTS
+        </span>
+
+        <h2>
+          ECE <strong>COMMAND CENTRE</strong>
+        </h2>
+
+        <p>
+          Contact the ECE coordinators for event details,
+          registration and technical assistance.
+        </p>
+
+      </div>
+
+
+      <div class="coord-grid">
+
+
+        <!-- STAFF COORDINATOR -->
+
+        <div class="coord-card glass">
+
+          <span>
+            STAFF CO-ORDINATOR
+          </span>
+
+          <h3>
+            Mrs. S. Apshanaparvin
+          </h3>
+
+          <p>
+            Assistant Professor / Dept of ECE
+          </p>
+
+          <div>
+
+            <a href="tel:9943044232" class="coord-btn phone-btn">
+              ☎ 99430 44232
+            </a>
+
+            <a href="https://wa.me/919943044232"
+               target="_blank" class="coord-btn wa-btn">
+              ◉ WHATSAPP
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <!-- STUDENT COORDINATOR -->
+
+        <div class="coord-card glass">
+
+          <span>
+            STUDENT CO-ORDINATOR
+          </span>
+
+          <h3>
+            Mr. N.S. Shamraj
+          </h3>
+
+          <p>
+            IV / ECE
+          </p>
+
+          <div>
+
+            <a href="tel:9894183263" class="coord-btn phone-btn">
+              ☎ 98941 83263
+            </a>
+
+            <a href="https://wa.me/919894183263"
+               target="_blank" class="coord-btn wa-btn">
+              ◉ WHATSAPP
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+
+  <!-- ================= REGISTRATION MODAL ================= -->
+
+  <div class="modal-overlay"
+       id="registerModal">
+
+    <div class="modal glass">
+
+      <button class="close"
+              onclick="closeModals()">
+        ×
+      </button>
+
+      <span class="modal-tag">
+        // OFFICIAL REGISTRATION
+      </span>
+
+      <h2>
+        ACCESS <strong>GRANTED</strong>
+      </h2>
+
+      <div class="modal-info dept-reg-info">
+        <p class="reg-fee-item">A common registration fee of ₹100 must be paid online through the website.</p>
+        <p class="reg-fee-item">Participants can register for any number of events.</p>
+        <p class="reg-fee-item">An additional ₹50 per event can be paid on the spot at the college during event registration.</p>
+      </div>
+
+      <div class="dept-reg-note">
+        <strong>Note:</strong> Please make sure you have checked the event details and rules carefully before registering. Once you have confirmed the details, proceed with the registration.
+      </div>
+
+      <a class="cyber-btn full" href="https://docs.google.com/forms/d/e/1FAIpQLSdmYicOXk6v6klal2ZyKv4IX3fZWBVkng2vHG-8dORHaEDCHw/viewform" target="_blank" rel="noopener noreferrer">REGISTER</a>
+
+    </div>
+
+  </div>
+
+
+  <!-- ================= RULES MODAL ================= -->
+
+  <div class="modal-overlay"
+       id="rulesModal">
+
+    <div class="modal glass">
+
+      <button class="close"
+              onclick="closeModals()">
+        ×
+      </button>
+
+      <span class="modal-tag">
+        // OFFICIAL RULES &amp; GUIDELINES
+      </span>
+
+      <h2 id="rulesTitle">
+        EVENT DETAILS
+      </h2>
+
+      <div class="rule-meta">
+
+        <span id="rulesTime"></span>
+
+        <span id="rulesVenue"></span>
+
+        <span id="rulesTeam" style="display:none;"></span>
+
+      </div>
+
+      <div class="modal-rules-heading">// GUIDELINES</div>
+
+      <ul id="rulesBody"></ul>
+
+      <div class="modal-criteria-box" id="modalCriteriaBox" style="display:none;">
+        <span class="criteria-tag">// EVALUATION CRITERIA</span>
+        <p id="rulesCriteriaText"></p>
+      </div>
+
+      <div class="modal-coord-box" id="modalCoordBox" style="display:none;">
+        <span class="coord-tag">// EVENT CO-ORDINATORS</span>
+        <p id="rulesCoordText"></p>
+      </div>
+
+      <button class="cyber-btn full"
+              onclick="closeModals()">
+
+        ACKNOWLEDGE PROTOCOL
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ================= JAVASCRIPT ================= -->
+
+  <script src="script.js"></script>
+
+</body>
+</html>

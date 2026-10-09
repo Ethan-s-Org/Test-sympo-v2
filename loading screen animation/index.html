@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RPSIT - Loading</title>
+
+  <!-- Google Fonts: Outfit & Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="./vars.css">
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <main class="loading-screen i-phone-16-17-pro-1">
+    <!-- Ambient glowing backdrops -->
+    <div class="ambient-glow glow-primary" aria-hidden="true"></div>
+    <div class="ambient-glow glow-accent" aria-hidden="true"></div>
+    <div class="ambient-glow glow-center" aria-hidden="true"></div>
+
+    <!-- Floating ambient particles -->
+    <div class="particles" aria-hidden="true">
+      <span class="particle p1"></span>
+      <span class="particle p2"></span>
+      <span class="particle p3"></span>
+      <span class="particle p4"></span>
+      <span class="particle p5"></span>
+      <span class="particle p6"></span>
+    </div>
+
+    <!-- Centered Loader Card / Unit -->
+    <div class="loader-content">
+      <!-- Animated Logo Container -->
+      <div class="logo-wrapper">
+
+        <!-- The Official Logo Image with Floating Animation -->
+        <div class="logo-frame">
+          <img class="images-logo-removebg-preview-1" src="images-logo-removebg-preview-10.png"
+            alt="RPSIT Official Logo" />
+          <div class="logo-shine" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <!-- Typography / Brand Name -->
+      <div class="brand-block">
+        <h1 class="rpsit">RPSIT</h1>
+      </div>
+
+      <!-- Modern Loading Progress Bar & Status -->
+      <div class="loader-status" role="status" aria-live="polite">
+        <div class="progress-track">
+          <div class="progress-bar">
+            <span class="progress-glow"></span>
+          </div>
+        </div>
+        <div class="status-meta">
+          <span class="status-label">INITIALIZING</span>
+          <span class="status-dots">
+            <span class="dot">.</span>
+            <span class="dot">.</span>
+            <span class="dot">.</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>

@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>EEE Arena | INFINITE TECHFEST' 26</title>
+
+  <meta name="description"
+        content="EEE Department events at INFINITE TECHFEST' 26">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- BACKGROUND -->
+  <canvas id="webgl-bg"></canvas>
+
+  <div class="scanlines"></div>
+  <div class="noise"></div>
+
+
+  <!-- HEADER -->
+  <header class="hud-header">
+
+    <a href="../home page/index.html" class="brand glass">
+
+      <div class="brand-icon">◈</div>
+
+      <div>
+        <strong>R P SARATHY</strong>
+        <span>INSTITUTE OF TECHNOLOGY</span>
+        <small class="brand-sub">(AN AUTONOMOUS INSTITUTION)</small>
+      </div>
+
+    </a>
+
+
+    <nav class="main-nav glass">
+
+      <a href="../home page/index.html">HOME</a>
+
+      <a href="#events">EVENTS</a>
+
+      <a href="#coordinators">COORDINATORS</a>
+
+    </nav>
+
+
+    <div class="hud-status glass">
+
+      <span class="status-dot"></span>
+
+      <span>SYSTEM ONLINE</span>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- DEPARTMENT SWITCHER -->
+
+  <div class="dept-switcher glass">
+
+    <a href="../cse/cse.html">01 // CSE</a>
+
+    <a href="../ai&ds/aids.html">02 // AI & DS</a>
+
+    <a href="../it/it.html">03 // IT</a>
+
+    <a href="../ece/ece.html">04 // ECE</a>
+
+    <a href="../cyber/cyber.html">05 // CYBER</a>
+
+    <a class="active" href="#">06 // EEE</a>
+
+    <a href="../mech/mech.html">07 // MECH</a>
+
+    <a href="../s&h/s&h.html">08 // S & H</a>
+
+  </div>
+
+
+
+  <main id="top">
+
+
+    <!-- HERO SECTION -->
+
+    <section class="hero section-grid">
+
+      <div class="hero-content">
+
+        <a class="back-link" href="../home page/index.html">
+          ← RETURN TO HOME PAGE
+        </a>
+
+
+        <div class="eyebrow">
+
+          <span></span>
+
+          DEPARTMENT ARENA 06 // EEE
+
+        </div>
+
+
+        <h1>
+          ELECTRICAL <em>&amp;</em><br>
+          ELECTRONICS<br>
+          <span>ENGINEERING</span>
+        </h1>
+
+
+        <p class="hero-description">
+
+          Explore technical creativity through paper presentation,
+          project innovation, circuit designing, circuit debugging
+          and technical quiz challenges.
+
+        </p>
+
+        <!-- STATS -->
+
+        <div class="stats">
+
+          <div>
+            <b>05</b>
+            <small>TECHNICAL EVENTS</small>
+          </div>
+
+          <div>
+            <b>₹100</b>
+            <small>ENTRY FEE</small>
+          </div>
+
+          <div>
+            <b>₹50</b>
+            <small>EVENT FEE (PER EVENT)</small>
+          </div>
+
+        </div>
+
+
+        <!-- REGISTER BUTTON -->
+
+        <button
+          class="cyber-btn"
+          onclick="openRegisterModal('EEE Department')">
+
+          <span>⚡ REGISTER FOR EEE</span>
+
+          <i>→</i>
+
+        </button>
+
+      </div>
+
+
+
+      <!-- TERMINAL -->
+
+      <div class="hero-terminal glass">
+
+        <div class="terminal-top">
+
+          <span>EEE_CORE // LIVE FEED</span>
+
+          <span class="terminal-live">
+            ● LIVE
+          </span>
+
+        </div>
+
+
+        <div class="terminal-body">
+
+          <div class="eee-torus-wrap" id="eeeTorusWrap">
+            <canvas id="eeeTorusCanvas"></canvas>
+            <div class="eee-core-badge">
+              <span class="pulse-beacon"></span>
+              <span>TESLA FLUX REACTOR // 440 kV GRID</span>
+            </div>
+          </div>
+
+          <div class="terminal-lines">
+            <p><b>&gt;</b> initializing_grid_telemetry.py</p>
+            <p><b>&gt;</b> grid_frequency: <span>50.00 Hz [LOCKED]</span></p>
+            <p><b>&gt;</b> electromagnetic_flux: <span>440 kV [OPTIMAL]</span></p>
+            <p><b>&gt;</b> power_factor: <span>0.99 [SYNCHRONIZED]</span></p>
+            <p><b>&gt;</b> eee_engineers: <span id="counter">040+</span></p>
+            <p><b>&gt;</b> status: <span class="blink">PLASMA REACTOR ARMED_</span></p>
+          </div>
+
+        </div>
+
+
+        <div class="terminal-footer">
+
+          <span>
+            DRAG / SCROLL TO EXPLORE
+          </span>
+
+          <span>
+            SYS.EEE.06
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- EVENTS -->
+
+    <section id="events" class="content-section">
+
+
+      <div class="section-heading">
+
+        <span>
+          // EEE COMPETITION TRACKS
+        </span>
+
+        <h2>
+          OFFICIAL
+          <strong>EEE EVENTS</strong>
+        </h2>
+
+        <p>
+          Five technical events organized by the
+          Department of Electrical &amp; Electronics Engineering.
+        </p>
+
+      </div>
+
+
+
+      <div class="events-grid">
+
+
+        <!-- EVENT 01: PAPER PRESENTATION -->
+        <article class="event-card">
+          <div class="event-top">
+            <b>01</b>
+            <span>RESEARCH // PRESENTATION</span>
+          </div>
+          <h3>PAPER PRESENTATION</h3>
+          <p>
+            Individual or team participation may be permitted, with maximum 2–3 members per team. Emerging and relevant areas of Electrical and Electronics Engineering.
+          </p>
+          <div class="meta">
+            <span>👥 2–3 MEMBERS</span>
+            <span>⌖ SMART CLASS ROOM: M212</span>
+          </div>
+          <div class="actions">
+            <button
+              class="outline-btn"
+              onclick="openRulesModal(
+                'Paper Presentation',
+                null,
+                'Smart Class Room: M212',
+                [
+                  'Individual or team participation may be permitted, with maximum 2–3 members per team.',
+                  'The paper should be related to emerging and relevant areas of Electrical and Electronics Engineering, such as:<ul class=\'modal-sublist\'><li>Power Systems and Smart Grids</li><li>Electrical Machines and Drives</li><li>Power Electronics and Energy Conversion</li><li>Renewable and Sustainable Energy</li><li>Electric Vehicles and E-Mobility</li><li>Artificial Intelligence and Machine Learning in EEE</li><li>High Voltage Engineering</li><li>Energy Storage and Battery Technologies</li><li>Smart Energy Management</li><li>Robotics and Intelligent Systems</li></ul>',
+                  'Presentation time: 8–10 minutes.',
+                  'Q&amp;A: 2–3 minutes.'
+                ],
+                null,
+                '<strong>Staff Co-ordinator:</strong> Dr. R. Valarmathi<br><strong>Student Co-ordinator:</strong><br>P. Sanjay, IV-EEE<br>V. Shakthi Sri, II-EEE<br>Mahalakshmi, III-EEE',
+                '2–3 Members'
+              )">
+              VIEW RULES
+            </button>
+          </div>
+        </article>
+
+        <!-- EVENT 02: PROJECT EXPO -->
+        <article class="event-card">
+          <div class="event-top">
+            <b>02</b>
+            <span>PROJECT // EXPO</span>
+          </div>
+          <h3>PROJECT EXPO</h3>
+          <p>
+            Projects should demonstrate innovation, technical knowledge, practical application, and problem-solving ability in EEE-related areas.
+          </p>
+          <div class="meta">
+            <span>👥 2–4 MEMBERS</span>
+            <span>⌖ MU LAB</span>
+          </div>
+          <div class="actions">
+            <button
+              class="outline-btn"
+              onclick="openRulesModal(
+                'Project Expo',
+                null,
+                'Mu Lab',
+                [
+                  'Projects may be presented individually or as a team of 2–4 members.',
+                  'Projects should demonstrate innovation, technical knowledge, practical application, and problem-solving ability in EEE-related areas.'
+                ],
+                'Mr Karthikeyan<br>General Electrical and Electronics Engineering, Salem',
+                '<strong>Staff Co-ordinator:</strong> Dr. M. Vetrivel<br><strong>Student Co-ordinator:</strong><br>B. Salman, IV-EEE<br>P. Chinthamani, II-EEE<br>R. Divya, II-EEE',
+                '2–4 Members'
+              )">
+              VIEW RULES
+            </button>
+          </div>
+        </article>
+
+        <!-- EVENT 03: TECHNICAL QUIZ -->
+        <article class="event-card">
+          <div class="event-top">
+            <b>03</b>
+            <span>QUIZ // TECHNICAL</span>
+          </div>
+          <h3>TECHNICAL QUIZ</h3>
+          <p>
+            Written examination based on Electrical and Electronics Engineering fundamentals and emerging technologies.
+          </p>
+          <div class="meta">
+            <span>⌖ ELECTRICAL MACHINES LABORATORY</span>
+            <span>◷ 30–45 MINS</span>
+          </div>
+          <div class="actions">
+            <button
+              class="outline-btn"
+              onclick="openRulesModal(
+                'Technical Quiz',
+                '30–45 minutes',
+                'Electrical Machines laboratory',
+                [
+                  'The quiz will be conducted as a written examination.',
+                  'Questions will be based on Electrical and Electronics Engineering fundamentals and emerging technologies.',
+                  'The question paper may contain MCQs, numerical problems, concept-based questions, identification questions, and application-oriented questions.',
+                  'Suggested duration: 30–45 minutes.'
+                ],
+                null,
+                '<strong>Staff Co-ordinator:</strong> Mrs. C. Keerthana<br><strong>Student Co-ordinator:</strong><br>A. Gokulakrishnan, IV-EEE<br>N. Sasikumar, II-EEE',
+                null
+              )">
+              VIEW RULES
+            </button>
+          </div>
+        </article>
+
+        <!-- EVENT 04: CIRCUIT WARRIORS -->
+        <article class="event-card">
+          <div class="event-top">
+            <b>04</b>
+            <span>CIRCUIT // WARRIORS</span>
+          </div>
+          <h3>CIRCUIT WARRIORS</h3>
+          <p>
+            Test participants' ability to identify, analyze, troubleshoot, and rectify faults in electrical and electronic circuits.
+          </p>
+          <div class="meta">
+            <span>⌖ ELECTRON DEVICES AND CIRCUITS LABORATORY</span>
+          </div>
+          <div class="actions">
+            <button
+              class="outline-btn"
+              onclick="openRulesModal(
+                'Circuit Warriors',
+                null,
+                'Electron Devices and Circuits Laboratory',
+                [
+                  'The event is designed to test participants’ ability to identify, analyze, troubleshoot, and rectify faults in electrical and electronic circuits.',
+                  'Participants may be provided with a faulty circuit, circuit diagram, PCB, simulation, or wiring setup containing one or more intentional faults.',
+                  'Participants should:<ul class=\'modal-sublist\'><li>Study the circuit and understand its expected operation.</li><li>Identify the symptoms of the fault.</li><li>Analyze the circuit systematically.</li><li>Locate the faulty component, connection, or design error.</li><li>Identify the cause of the malfunction.</li><li>Rectify the fault using the permitted components/tools.</li><li>Test the circuit after correction.</li><li>Verify the expected output.</li></ul>'
+                ],
+                null,
+                '<strong>Staff Co-ordinator:</strong> Mr. P. Velmurugan<br><strong>Student Co-ordinator:</strong><br>R. Sakthivel, IV-EEE<br>R. Srivaishnavi, II-EEE<br>S. Kavin, II-EEE',
+                null
+              )">
+              VIEW RULES
+            </button>
+          </div>
+        </article>
+
+        <!-- EVENT 05: MACHINE MASTER -->
+        <article class="event-card">
+          <div class="event-top">
+            <b>05</b>
+            <span>MACHINES // MASTER</span>
+          </div>
+          <h3>MACHINE MASTER</h3>
+          <p>
+            Identify, analyse and solve problems related to DC machines, transformers and AC machines.
+          </p>
+          <div class="meta">
+            <span>⌖ ELECTRICAL MACHINES LABORATORY</span>
+          </div>
+          <div class="actions">
+            <button
+              class="outline-btn"
+              onclick="openRulesModal(
+                'Machine Master',
+                null,
+                'Electrical Machines laboratory',
+                [
+                  'Identify, analyse and solve problems related to DC machines, transformers and AC machines.',
+                  'Machine Master: Participants will identify different types of motors, analyse their operating principles, interpret nameplate details, solve technical problems, and troubleshoot common motor-related faults.'
+                ],
+                null,
+                '<strong>Staff Co-ordinator:</strong> Mr. R. Yuvaraj<br><strong>Student Co-ordinator:</strong><br>S. Sureshkumar, IV-EEE<br>S. B. Vishvanth, II-EEE<br>K. Preethi sree, II-EEE',
+                null
+              )">
+              VIEW RULES
+            </button>
+          </div>
+        </article>
+      </div>
+
+    </section>
+
+
+
+    <!-- COORDINATORS -->
+
+    <section
+      id="coordinators"
+      class="content-section coordinators">
+
+
+      <div class="section-heading">
+
+        <span>
+          // EEE DEPARTMENT CONTACTS
+        </span>
+
+        <h2>
+          EEE
+          <strong>COMMAND CENTRE</strong>
+        </h2>
+
+        <p>
+          Contact the EEE department coordinators
+          for event submissions and registration assistance.
+        </p>
+
+      </div>
+
+
+
+      <div class="coord-grid">
+
+
+        <!-- STAFF -->
+
+        <div class="coord-card glass">
+
+          <span>
+            STAFF CO-ORDINATOR
+          </span>
+
+          <h3>
+            Mr. M. Dineshkumar
+          </h3>
+
+          <p>
+            Assistant Professor / Dept of EEE
+          </p>
+
+
+          <div>
+
+            <a href="tel:9626132311" class="coord-btn phone-btn">
+              ☎ 96261 32311
+            </a>
+
+            <a
+              href="https://wa.me/919626132311"
+              target="_blank" class="coord-btn wa-btn">
+
+              ◉ WHATSAPP
+
+            </a>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- STUDENT -->
+
+        <div class="coord-card glass">
+
+          <span>
+            STUDENT CO-ORDINATOR
+          </span>
+
+          <h3>
+            Mr. G. Santhosh
+          </h3>
+
+          <p>
+            Final Year (IV / EEE)
+          </p>
+
+
+          <div>
+
+            <a href="tel:8667685436" class="coord-btn phone-btn">
+              ☎ 86676 85436
+            </a>
+
+            <a
+              href="https://wa.me/918667685436"
+              target="_blank" class="coord-btn wa-btn">
+
+              ◉ WHATSAPP
+
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+
+
+  <!-- REGISTRATION MODAL -->
+
+  <div
+    class="modal-overlay"
+    id="registerModal">
+
+    <div class="modal glass">
+
+      <button
+        class="close"
+        onclick="closeModals()">
+
+        ×
+
+      </button>
+
+
+      <span class="modal-tag">
+
+        // OFFICIAL REGISTRATION
+
+      </span>
+
+
+      <h2>
+
+        ACCESS
+        <strong>GRANTED</strong>
+
+      </h2>
+
+
+      <div class="modal-info dept-reg-info">
+        <p class="reg-fee-item">A common registration fee of ₹100 must be paid online through the website.</p>
+        <p class="reg-fee-item">Participants can register for any number of events.</p>
+        <p class="reg-fee-item">An additional ₹50 per event can be paid on the spot at the college during event registration.</p>
+      </div>
+
+      <div class="dept-reg-note">
+        <strong>Note:</strong> Please make sure you have checked the event details and rules carefully before registering. Once you have confirmed the details, proceed with the registration.
+      </div>
+
+      <a class="cyber-btn full" href="https://docs.google.com/forms/d/e/1FAIpQLSeYYmDxR0Zdckb2I4Pxv1BmmfB7jQXwtnvU2FW-TezEgm9-_A/viewform" target="_blank" rel="noopener noreferrer">REGISTER</a>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- RULES MODAL -->
+
+  <div
+    class="modal-overlay"
+    id="rulesModal">
+
+    <div class="modal glass">
+
+      <button
+        class="close"
+        onclick="closeModals()">
+
+        ×
+
+      </button>
+
+
+      <span class="modal-tag">
+        // OFFICIAL RULES &amp; GUIDELINES
+      </span>
+
+
+      <h2 id="rulesTitle">
+        EVENT DETAILS
+      </h2>
+
+
+      <div class="rule-meta">
+
+        <span id="rulesTime"></span>
+
+        <span id="rulesVenue"></span>
+
+        <span id="rulesTeam" style="display:none;"></span>
+
+      </div>
+
+
+      <div class="modal-rules-heading">// GUIDELINES</div>
+
+      <ul id="rulesBody"></ul>
+
+
+      <div class="modal-criteria-box" id="modalCriteriaBox" style="display:none;">
+        <span class="criteria-tag">// JURY</span>
+        <p id="rulesCriteriaText"></p>
+      </div>
+
+
+      <div class="modal-coord-box" id="modalCoordBox" style="display:none;">
+        <span class="coord-tag">// CO-ORDINATORS</span>
+        <p id="rulesCoordText"></p>
+      </div>
+
+
+      <button
+        class="cyber-btn full"
+        onclick="closeModals()">
+
+        ACKNOWLEDGE PROTOCOL
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>
