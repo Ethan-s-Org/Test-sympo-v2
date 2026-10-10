@@ -4,29 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="INFINITE TECHFEST' 26 at RP Sarathy Institute of Technology - 8 Department Arenas, Hackathons, Paper Presentations, Robotic Challenges, and Technical Competitions.">
 
     <title>INFINITE TECHFEST' 26</title>
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Three.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
-    <!-- GSAP -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
-    <!-- Google Fonts -->
+    <!-- DNS Preconnect for Faster Resource Fetching -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+    <!-- Google Fonts with display=swap -->
     <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&family=Outfit:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
         rel="stylesheet">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Deferred Frameworks (Non-render-blocking, preserving execution order) -->
+    <script src="https://cdn.tailwindcss.com" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
 </head>
 
 
@@ -59,7 +59,7 @@
                 <div class="logo-frame">
                     <img class="images-logo-removebg-preview-1" src="assets/images-logo-removebg-preview-10.png"
                         onerror="this.src='../loading screen animation/images-logo-removebg-preview-10.png'"
-                        alt="RPSIT Official Logo" />
+                        alt="RPSIT Official Logo" width="130" height="130" fetchpriority="high" decoding="sync" />
                     <div class="logo-shine" aria-hidden="true"></div>
                 </div>
             </div>
@@ -1375,7 +1375,7 @@
          JAVASCRIPT
     ========================================================== -->
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 
 
 </body>

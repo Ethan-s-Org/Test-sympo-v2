@@ -78,6 +78,7 @@
             background-size: 100% 4px;
             pointer-events: none;
             opacity: 0.4;
+            contain: strict;
         }
 
         /* Space Canvas Container */
@@ -89,6 +90,9 @@
             height: 100vh;
             z-index: 1;
             pointer-events: none;
+            contain: strict;
+            will-change: transform;
+            transform: translateZ(0);
         }
 
         /* Floating interactive indicators */

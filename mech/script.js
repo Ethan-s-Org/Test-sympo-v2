@@ -32,7 +32,7 @@ const renderer = new THREE.WebGLRenderer({
 });
 
 renderer.setPixelRatio(
-  Math.min(window.devicePixelRatio, 2)
+  Math.min(window.devicePixelRatio || 1, 1.6)
 );
 
 renderer.setSize(
@@ -144,20 +144,13 @@ scene.add(grid);
 let mx = 0;
 let my = 0;
 
-
 window.addEventListener(
   "pointermove",
   (e) => {
-
-    mx =
-      (e.clientX / window.innerWidth - 0.5) *
-      0.6;
-
-    my =
-      (e.clientY / window.innerHeight - 0.5) *
-      0.4;
-
-  }
+    mx = (e.clientX / window.innerWidth - 0.5) * 0.6;
+    my = (e.clientY / window.innerHeight - 0.5) * 0.4;
+  },
+  { passive: true }
 );
 
 
@@ -165,40 +158,27 @@ window.addEventListener(
 // ANIMATION LOOP
 // ==========================================
 
+let isTabVisible = true;
+document.addEventListener("visibilitychange", () => {
+  isTabVisible = !document.hidden;
+  if (isTabVisible) requestAnimationFrame(animate);
+});
+
 function animate() {
+  if (!isTabVisible) return;
 
-  requestAnimationFrame(
-    animate
-  );
-
+  requestAnimationFrame(animate);
 
   // Rotate particles
-
-  stars.rotation.y +=
-    0.00045;
-
-  stars.rotation.x +=
-    0.00012;
-
+  stars.rotation.y += 0.00045;
+  stars.rotation.x += 0.00012;
 
   // Mouse interaction
+  group.rotation.y += (mx - group.rotation.y) * 0.012;
+  group.rotation.x += (-my - group.rotation.x) * 0.012;
 
-  group.rotation.y +=
-    (mx - group.rotation.y) *
-    0.012;
-
-  group.rotation.x +=
-    (-my - group.rotation.x) *
-    0.012;
-
-
-  renderer.render(
-    scene,
-    camera
-  );
-
+  renderer.render(scene, camera);
 }
-
 
 animate();
 
@@ -210,25 +190,12 @@ animate();
 window.addEventListener(
   "resize",
   () => {
-
-    camera.aspect =
-      window.innerWidth /
-      window.innerHeight;
-
+    camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
-
-
-    renderer.setSize(
-      window.innerWidth,
-      window.innerHeight
-    );
-
-
-    renderer.setPixelRatio(
-      Math.min(window.devicePixelRatio, 2)
-    );
-
-  }
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.6));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  },
+  { passive: true }
 );
 
 
