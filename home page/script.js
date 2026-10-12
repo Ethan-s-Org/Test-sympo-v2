@@ -172,6 +172,8 @@ function loadPlanetTextureSafe(localRelativePath, cdnUrl, fallbackCanvasFn, onLo
     const firstUrl = isFileProto ? cdnUrl : localRelativePath;
     const secondUrl = isFileProto ? localRelativePath : cdnUrl;
 
+    const baseTex = fallbackCanvasFn ? fallbackCanvasFn() : new THREE.Texture();
+
     globalTextureLoader.load(
         firstUrl,
         (tex) => {
@@ -193,20 +195,12 @@ function loadPlanetTextureSafe(localRelativePath, cdnUrl, fallbackCanvasFn, onLo
                 undefined,
                 () => {
                     console.log('Using procedural canvas fallback for ' + localRelativePath);
-                    if (fallbackCanvasFn) {
-                        try {
-                            const fallbackTex = fallbackCanvasFn();
-                            if (onLoaded) onLoaded(fallbackTex);
-                        } catch (e) {
-                            console.warn('Fallback error for ' + localRelativePath, e);
-                        }
-                    }
                 }
             );
         }
     );
 
-    return null;
+    return baseTex;
 }
 
 // 1. Point Star Sprite (glowing diamond pinprick)
@@ -228,10 +222,10 @@ function createStarTexture() {
     return optimizeTexture(new THREE.CanvasTexture(canvas));
 }
 
-// 2. Photorealistic Solar Photosphere (NASA SDO AIA 304 Å Luminous Incandescent Synthesis 512x256)
+// 2. Photorealistic Solar Photosphere (NASA SDO AIA 304 Å Luminous Incandescent Synthesis 2048x1024)
 function createSunTexture() {
-    const width = 512;
-    const height = 256;
+    const width = 2048;
+    const height = 1024;
     const canvas = document.createElement('canvas');
     canvas.width = width;
     canvas.height = height;
@@ -240,43 +234,49 @@ function createSunTexture() {
     const data = imgData.data;
 
     // 1. SDO AIA 304 Å Plasma Lookup Table (256-color LUT)
+    // Thermonuclear spectrum: deep crimson -> burning reddish-orange -> fiery molten orange -> golden amber -> incandescent white cores
     const palette = new Uint8Array(256 * 3);
     for (let i = 0; i < 256; i++) {
         const t = i / 255.0;
         let r, g, b;
         if (t < 0.28) {
+            // Deepest convective fissures & crevices: rich burning crimson-orange
             const k = t / 0.28;
-            r = Math.floor(185 + k * 55);
-            g = Math.floor(18 + k * 42);
+            r = Math.floor(185 + k * 55); // 185 -> 240
+            g = Math.floor(18 + k * 42);   // 18 -> 60
             b = 0;
         } else if (t < 0.62) {
+            // Fiery molten thermonuclear orange (dominant photosphere body)
             const k = (t - 0.28) / 0.34;
-            r = Math.floor(240 + k * 15);
-            g = Math.floor(60 + k * 70);
+            r = Math.floor(240 + k * 15);  // 240 -> 255
+            g = Math.floor(60 + k * 70);   // 60 -> 130 (rich warm orange!)
             b = Math.floor(k * 4);
         } else if (t < 0.84) {
+            // Luminous golden amber granulation crests
             const k = (t - 0.62) / 0.22;
             r = 255;
-            g = Math.floor(130 + k * 55);
-            b = Math.floor(4 + k * 20);
+            g = Math.floor(130 + k * 55);  // 130 -> 185 (warm amber gold)
+            b = Math.floor(4 + k * 20);    // 4 -> 24
         } else if (t < 0.93) {
+            // High-energy magnetic plage networks
             const k = (t - 0.84) / 0.09;
             r = 255;
-            g = Math.floor(185 + k * 45);
-            b = Math.floor(24 + k * 70);
+            g = Math.floor(185 + k * 45);  // 185 -> 230
+            b = Math.floor(24 + k * 70);   // 24 -> 94
         } else {
+            // White-hot magnetic reconnection flare cores
             const k = (t - 0.93) / 0.07;
             r = 255;
-            g = Math.floor(230 + k * 25);
-            b = Math.floor(94 + k * 161);
+            g = Math.floor(230 + k * 25);  // 230 -> 255
+            b = Math.floor(94 + k * 161);  // 94 -> 255 (dazzling white)
         }
         palette[i * 3] = r;
         palette[i * 3 + 1] = g;
         palette[i * 3 + 2] = b;
     }
 
-    // 2. Coarse Turbulent Plasma Grid (64 x 32)
-    const GW = 64, GH = 32;
+    // 2. Coarse Turbulent Plasma Grid (256 x 128) - Pure Organic Fractal Noise (Zero Grid Artifacts!)
+    const GW = 256, GH = 128;
     const coarseField = new Float32Array(GW * GH);
     const coarseTurb = new Float32Array(GW * GH);
 
@@ -284,6 +284,7 @@ function createSunTexture() {
         const ny = gy / GH;
         for (let gx = 0; gx < GW; gx++) {
             const nx = gx / GW;
+            // Natural roiling convective vortices (domain warped)
             const n1 = Noise.noise2D(nx * 10.0, ny * 10.0);
             const n2 = Noise.noise2D(nx * 22.0 + n1 * 1.8, ny * 22.0 + n1 * 1.8) * 0.5;
             const n3 = Noise.noise2D(nx * 48.0 + n2 * 1.4, ny * 48.0 + n2 * 1.4) * 0.25;
@@ -292,21 +293,21 @@ function createSunTexture() {
         }
     }
 
-    // Active Magnetic Plage Complexes
+    // Active Magnetic Plage Complexes (matching the prominent incandescent flare regions in Image 2)
     const plages = [
-        { cx: 0.50, cy: 0.35, rx: 0.075, ry: 0.055, boost: 0.38, flare: 0.60 },
-        { cx: 0.52, cy: 0.72, rx: 0.070, ry: 0.050, boost: 0.40, flare: 0.65 },
-        { cx: 0.66, cy: 0.46, rx: 0.065, ry: 0.045, boost: 0.35, flare: 0.55 },
-        { cx: 0.16, cy: 0.45, rx: 0.055, ry: 0.045, boost: 0.35, flare: 0.50 },
-        { cx: 0.76, cy: 0.28, rx: 0.070, ry: 0.050, boost: 0.38, flare: 0.58 },
-        { cx: 0.34, cy: 0.54, rx: 0.045, ry: 0.038, boost: 0.30, flare: 0.45 },
+        { cx: 0.50, cy: 0.35, rx: 0.075, ry: 0.055, boost: 0.38, flare: 0.60 }, // Upper-Center blazing flare complex
+        { cx: 0.52, cy: 0.72, rx: 0.070, ry: 0.050, boost: 0.40, flare: 0.65 }, // Lower-Center white-hot dual core
+        { cx: 0.66, cy: 0.46, rx: 0.065, ry: 0.045, boost: 0.35, flare: 0.55 }, // Center-Right active plage
+        { cx: 0.16, cy: 0.45, rx: 0.055, ry: 0.045, boost: 0.35, flare: 0.50 }, // Left-limb active region
+        { cx: 0.76, cy: 0.28, rx: 0.070, ry: 0.050, boost: 0.38, flare: 0.58 }, // Upper-Right prominence anchor
+        { cx: 0.34, cy: 0.54, rx: 0.045, ry: 0.038, boost: 0.30, flare: 0.45 }, // Secondary magnetic knot
         { cx: 0.44, cy: 0.25, rx: 0.040, ry: 0.035, boost: 0.28, flare: 0.40 },
         { cx: 0.62, cy: 0.62, rx: 0.045, ry: 0.035, boost: 0.30, flare: 0.45 },
-        { cx: 0.04, cy: 0.52, rx: 0.045, ry: 0.035, boost: 0.28, flare: 0.40 },
+        { cx: 0.04, cy: 0.52, rx: 0.045, ry: 0.035, boost: 0.28, flare: 0.40 }, // Seamless equator seam
         { cx: 0.96, cy: 0.52, rx: 0.045, ry: 0.035, boost: 0.28, flare: 0.40 }
     ];
 
-    // 3. Synthesize 512 x 256 Organic Luminous Photosphere
+    // 3. Synthesize 2048 x 1024 Organic Luminous Photosphere
     for (let y = 0; y < height; y++) {
         const ny = y / height;
         const gy = ny * (GH - 1);
@@ -321,6 +322,7 @@ function createSunTexture() {
             const x1 = Math.min(x0 + 1, GW - 1);
             const fx = gx - x0;
 
+            // Bilinear sample coarse plasma
             const p00 = coarseField[y0 * GW + x0], p10 = coarseField[y0 * GW + x1];
             const p01 = coarseField[y1 * GW + x0], p11 = coarseField[y1 * GW + x1];
             const plasma = (p00 * (1 - fx) + p10 * fx) * (1 - fy) + (p01 * (1 - fx) + p11 * fx) * fy;
@@ -329,12 +331,15 @@ function createSunTexture() {
             const t01 = coarseTurb[y1 * GW + x0], t11 = coarseTurb[y1 * GW + x1];
             const turb = (t00 * (1 - fx) + t10 * fx) * (1 - fy) + (t01 * (1 - fx) + t11 * fx) * fy;
 
-            const f1 = Noise.noise2D(nx * 40.0 + turb * 2.0, ny * 40.0 + turb * 2.0);
-            const f2 = Noise.noise2D(nx * 80.0 + f1 * 1.5, ny * 80.0 + f1 * 1.5) * 0.45;
+            // Convective granular cells with depth contrast (crests and valleys)
+            const f1 = Noise.noise2D(nx * 80.0 + turb * 2.0, ny * 80.0 + turb * 2.0);
+            const f2 = Noise.noise2D(nx * 160.0 + f1 * 1.5, ny * 160.0 + f1 * 1.5) * 0.45;
             const granules = (f1 + f2) * 0.16;
 
+            // Baseline energy: perfectly centered in the rich orange zone (0.42 average)
             let energy = 0.32 + plasma * 0.22 + granules;
 
+            // Active Magnetic Plage Networks (incandescent white-hot cores & golden veins)
             for (let i = 0; i < plages.length; i++) {
                 const pl = plages[i];
                 const dx = (nx - pl.cx) / pl.rx;
@@ -345,6 +350,7 @@ function createSunTexture() {
                     const falloff = 1.0 - d;
                     energy += falloff * pl.boost;
 
+                    // Dazzling white-hot core
                     if (d < 0.38) {
                         const coreT = 1.0 - d / 0.38;
                         energy += coreT * coreT * pl.flare;
@@ -352,6 +358,7 @@ function createSunTexture() {
                 }
             }
 
+            // Energy clamping & dynamic color mapping
             const eClamped = Math.min(1.0, Math.max(0.0, energy));
             const pIdx = Math.min(255, Math.floor(eClamped * 255)) * 3;
             const idx = (y * width + x) * 4;
@@ -369,10 +376,108 @@ function createSunTexture() {
     return optimizeTexture(texture);
 }
 
-// 3. Photorealistic Earth Texture Fallback (512 x 256)
+// 3. Photorealistic Earth Texture (Fractal Continents, Deserts, Forests, Coastlines)
 function createEarthTexture() {
-    const width = 512;
-    const height = 256;
+    const width = 1024;
+    const height = 512;
+    const canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext('2d');
+    const imgData = ctx.createImageData(width, height);
+    const data = imgData.data;
+
+    for (let y = 0; y < height; y++) {
+        const ny = y / height;
+        const lat = Math.abs(ny - 0.5) * 2.0; // 0 at equator, 1 at poles
+
+        for (let x = 0; x < width; x++) {
+            const nx = x / width;
+            const idx = (y * width + x) * 4;
+
+            // Multi-octave continental elevation map
+            const elev1 = Noise.fbm(nx * 5.0, ny * 3.2, 6);
+            const elev2 = Noise.fbm(nx * 14.0, ny * 9.0, 3) * 0.15;
+            const elevation = elev1 + elev2;
+
+            // Moisture & temperature distribution
+            const moisture = Noise.fbm(nx * 7.0 + 8.5, ny * 5.0 + 8.5, 4);
+
+            let r, g, b;
+
+            // Polar Ice Sheets (North and South poles)
+            if (lat > 0.82) {
+                const iceNoise = Noise.fbm(nx * 18.0, ny * 18.0, 3);
+                r = Math.floor(235 + iceNoise * 20);
+                g = Math.floor(242 + iceNoise * 13);
+                b = 255;
+            } else if (elevation < 0.48) {
+                // Ocean Water (Vibrant Space Blue & Caribbean Cyan Shelves)
+                if (elevation > 0.44) {
+                    // Shallow Continental Turquoise Shelf
+                    const t = (elevation - 0.44) / 0.04;
+                    r = Math.floor(0 + t * 15);
+                    g = Math.floor(145 + t * 75);
+                    b = Math.floor(215 + t * 40);
+                } else if (elevation > 0.36) {
+                    // Open Sapphire Ocean
+                    const t = (elevation - 0.36) / 0.08;
+                    r = Math.floor(5 + t * 10);
+                    g = Math.floor(65 + t * 70);
+                    b = Math.floor(165 + t * 50);
+                } else {
+                    // Deep Oceanic Basin (Radiant Space Blue, zero muddy dark tones)
+                    r = 5;
+                    g = 55;
+                    b = 165;
+                }
+            } else {
+                // Landmass Biomes (Vibrant Lush Green, Zero Brown)
+                if (elevation > 0.65) {
+                    // High Mountain Ridges & Snow Caps
+                    const t = (elevation - 0.65) / 0.15;
+                    if (t > 0.5) {
+                        // Brilliant crisp snow peak
+                        r = 248; g = 252; b = 255;
+                    } else {
+                        // Alpine lush highland green
+                        r = Math.floor(40 + t * 25);
+                        g = Math.floor(155 + t * 45);
+                        b = Math.floor(75 + t * 30);
+                    }
+                } else if (lat < 0.45 && moisture < 0.40) {
+                    // Arid & Desert Plains: Fresh meadow green & soft spring accents (NO BROWN)
+                    const t = (0.40 - moisture) / 0.20;
+                    r = Math.floor(55 + t * 25);
+                    g = Math.floor(185 + t * 25);
+                    b = Math.floor(75 - t * 15);
+                } else if (moisture > 0.52) {
+                    // Dense Rainforest / Canopy (Lush Emerald Green)
+                    r = 18;
+                    g = 165;
+                    b = 48;
+                } else {
+                    // Temperate Plains & Savannas (Bright Fresh Green)
+                    r = 45;
+                    g = 195;
+                    b = 65;
+                }
+            }
+
+            data[idx] = r;
+            data[idx + 1] = g;
+            data[idx + 2] = b;
+            data[idx + 3] = 255;
+        }
+    }
+    ctx.putImageData(imgData, 0, 0);
+    return optimizeTexture(new THREE.CanvasTexture(canvas));
+}
+
+// 4. Earth Night Lights (Emissive Urban Infrastructure)
+function createEarthNightTexture() {
+    const width = 1024;
+    const height = 512;
     const canvas = document.createElement('canvas');
     canvas.width = width;
     canvas.height = height;
@@ -388,50 +493,23 @@ function createEarthTexture() {
             const nx = x / width;
             const idx = (y * width + x) * 4;
 
-            const elev1 = Noise.fbm(nx * 5.0, ny * 3.2, 3);
-            const elev2 = Noise.noise2D(nx * 14.0, ny * 9.0) * 0.15;
+            // Match continental elevation
+            const elev1 = Noise.fbm(nx * 5.0, ny * 3.2, 6);
+            const elev2 = Noise.fbm(nx * 14.0, ny * 9.0, 3) * 0.15;
             const elevation = elev1 + elev2;
-            const moisture = Noise.fbm(nx * 7.0 + 8.5, ny * 5.0 + 8.5, 2);
 
-            let r, g, b;
-            if (lat > 0.82) {
-                const iceNoise = Noise.noise2D(nx * 18.0, ny * 18.0);
-                r = Math.floor(235 + iceNoise * 20);
-                g = Math.floor(242 + iceNoise * 13);
-                b = 255;
-            } else if (elevation < 0.48) {
-                if (elevation > 0.44) {
-                    const t = (elevation - 0.44) / 0.04;
-                    r = Math.floor(t * 15);
-                    g = Math.floor(145 + t * 75);
-                    b = Math.floor(215 + t * 40);
-                } else if (elevation > 0.36) {
-                    const t = (elevation - 0.36) / 0.08;
-                    r = Math.floor(5 + t * 10);
-                    g = Math.floor(65 + t * 70);
-                    b = Math.floor(165 + t * 50);
-                } else {
-                    r = 5; g = 55; b = 165;
-                }
-            } else {
-                if (elevation > 0.65) {
-                    const t = (elevation - 0.65) / 0.15;
-                    if (t > 0.5) {
-                        r = 248; g = 252; b = 255;
-                    } else {
-                        r = Math.floor(40 + t * 25);
-                        g = Math.floor(155 + t * 45);
-                        b = Math.floor(75 + t * 30);
-                    }
-                } else if (lat < 0.45 && moisture < 0.40) {
-                    const t = (0.40 - moisture) / 0.20;
-                    r = Math.floor(55 + t * 25);
-                    g = Math.floor(185 + t * 25);
-                    b = Math.floor(75 - t * 15);
-                } else if (moisture > 0.52) {
-                    r = 18; g = 165; b = 48;
-                } else {
-                    r = 45; g = 195; b = 65;
+            let r = 0, g = 0, b = 0;
+
+            // Only populate non-polar landmasses
+            if (elevation >= 0.48 && lat < 0.75) {
+                const popNoise = Noise.fbm(nx * 18.0 + 40, ny * 12.0 + 40, 4);
+                // Dense urban clusters along coastal margins
+                const coastalBonus = (elevation < 0.56) ? 0.12 : 0.0;
+                if (popNoise + coastalBonus > 0.62) {
+                    const intensity = (popNoise + coastalBonus - 0.62) / 0.38;
+                    r = Math.floor(255 * intensity);
+                    g = Math.floor(205 * intensity);
+                    b = Math.floor(100 * intensity);
                 }
             }
 
@@ -445,18 +523,10 @@ function createEarthTexture() {
     return optimizeTexture(new THREE.CanvasTexture(canvas));
 }
 
-// 4. Earth Night Lights Fallback
-function createEarthNightTexture() {
-    const canvas = document.createElement('canvas');
-    canvas.width = 256;
-    canvas.height = 128;
-    return optimizeTexture(new THREE.CanvasTexture(canvas));
-}
-
-// 5. Realistic Atmospheric Clouds Fallback (512 x 256)
+// 5. Realistic Atmospheric Clouds (Normal Blending, Swirling Storm Fronts)
 function createCloudsTexture() {
-    const width = 512;
-    const height = 256;
+    const width = 1024;
+    const height = 512;
     const canvas = document.createElement('canvas');
     canvas.width = width;
     canvas.height = height;
@@ -472,7 +542,8 @@ function createCloudsTexture() {
             const nx = x / width;
             const idx = (y * width + x) * 4;
 
-            const cNoise = Noise.fbm((nx + latWave) * 6.5, ny * 4.2, 2);
+            // Swirling atmospheric turbulence and trade wind shear
+            const cNoise = Noise.fbm((nx + latWave) * 6.5, ny * 4.2, 5);
 
             let alpha = 0;
             if (cNoise > 0.46) {
@@ -489,10 +560,10 @@ function createCloudsTexture() {
     return optimizeTexture(new THREE.CanvasTexture(canvas));
 }
 
-// 6. Photorealistic Saturn Atmosphere (Harmonic Gas Giant Bands 512x256)
+// 6. Photorealistic Saturn Atmosphere (Harmonic Gas Giant Bands, Cassini Hue)
 function createSaturnTexture() {
-    const width = 512;
-    const height = 256;
+    const width = 1024;
+    const height = 512;
     const canvas = document.createElement('canvas');
     canvas.width = width;
     canvas.height = height;
@@ -504,32 +575,36 @@ function createSaturnTexture() {
         const ny = y / height;
         const lat = Math.abs(ny - 0.5) * 2.0;
 
+        // Multi-frequency harmonic jet-stream bands
         const band1 = Math.sin(ny * 48.0) * 0.25;
         const band2 = Math.sin(ny * 110.0) * 0.12;
         const micro = Math.sin(ny * 240.0) * 0.05;
-        const baseVal = band1 + band2 + micro;
 
         for (let x = 0; x < width; x++) {
             const nx = x / width;
             const idx = (y * width + x) * 4;
 
-            const turb = Noise.noise2D(nx * 6.0, ny * 20.0) * 0.15;
-            const val = baseVal + turb;
+            const turb = Noise.fbm(nx * 6.0, ny * 20.0, 3) * 0.15;
+            const val = band1 + band2 + micro + turb;
 
             let r, g, b;
             if (lat > 0.82) {
+                // Polar hoods: slate blue-gray
                 r = Math.floor(130 + val * 25);
                 g = Math.floor(145 + val * 22);
                 b = Math.floor(155 + val * 20);
             } else if (lat < 0.14) {
+                // Equatorial belt: warm butterscotch gold
                 r = Math.floor(228 + val * 18);
                 g = Math.floor(190 + val * 22);
                 b = Math.floor(136 + val * 20);
             } else if (ny < 0.5) {
+                // Northern temperate: golden caramel & honey
                 r = Math.floor(210 + val * 25);
                 g = Math.floor(172 + val * 22);
                 b = Math.floor(118 + val * 20);
             } else {
+                // Southern temperate: muted amber & ochre
                 r = Math.floor(198 + val * 24);
                 g = Math.floor(160 + val * 22);
                 b = Math.floor(110 + val * 18);
@@ -545,10 +620,10 @@ function createSaturnTexture() {
     return optimizeTexture(new THREE.CanvasTexture(canvas));
 }
 
-// 7. High-Precision Saturn Ring System Texture (2048 x 64)
+// 7. High-Precision Saturn Ring System Texture (4096 x 64)
 function createSaturnRingTexture() {
     const canvas = document.createElement('canvas');
-    canvas.width = 2048;
+    canvas.width = 4096;
     canvas.height = 64;
     const ctx = canvas.getContext('2d');
 
@@ -585,8 +660,8 @@ function createSaturnRingTexture() {
 // 8. Saturn's Moon Titan Texture
 function createTitanTexture() {
     const canvas = document.createElement('canvas');
-    canvas.width = 256;
-    canvas.height = 128;
+    canvas.width = 512;
+    canvas.height = 256;
     const ctx = canvas.getContext('2d');
     const grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
     grad.addColorStop(0, '#d97724');
@@ -597,10 +672,10 @@ function createTitanTexture() {
     return optimizeTexture(new THREE.CanvasTexture(canvas));
 }
 
-// 9. Photorealistic White & Greyish Lunar Texture Fallback (512 x 256)
+// 9. Photorealistic White & Greyish Lunar Texture (Cratered Basalt Maria & Anorthosite Highlands)
 function createMoonTexture() {
-    const width = 512;
-    const height = 256;
+    const width = 1024;
+    const height = 512;
     const canvas = document.createElement('canvas');
     canvas.width = width;
     canvas.height = height;
@@ -608,6 +683,7 @@ function createMoonTexture() {
     const imgData = ctx.createImageData(width, height);
     const data = imgData.data;
 
+    // Lunar Maria centers (Sea of Tranquility, Oceanus Procellarum, Mare Imbrium)
     const maria = [
         { cx: 0.32, cy: 0.38, rx: 0.16, ry: 0.14, depth: 0.28 },
         { cx: 0.48, cy: 0.42, rx: 0.14, ry: 0.12, depth: 0.25 },
@@ -616,6 +692,7 @@ function createMoonTexture() {
         { cx: 0.78, cy: 0.50, rx: 0.10, ry: 0.08, depth: 0.18 }
     ];
 
+    // Prominent impact crater ray centers (Tycho, Copernicus, Kepler)
     const craters = [
         { cx: 0.42, cy: 0.76, r: 0.035, rayLen: 0.22 },
         { cx: 0.34, cy: 0.36, r: 0.030, rayLen: 0.18 },
@@ -628,10 +705,13 @@ function createMoonTexture() {
             const nx = x / width;
             const idx = (y * width + x) * 4;
 
+            // Multi-octave cratered regolith terrain
             const n1 = Noise.noise2D(nx * 8.0, ny * 8.0);
             const n2 = Noise.noise2D(nx * 24.0 + 4.2, ny * 24.0 + 1.8) * 0.4;
-            let regolith = (n1 + n2 + 1.4) / 2.8;
+            const n3 = Noise.noise2D(nx * 60.0 + n1 * 1.5, ny * 60.0 + n1 * 1.5) * 0.2;
+            let regolith = (n1 + n2 + n3 + 1.6) / 3.2; // 0.0 to 1.0 (anorthosite highlands)
 
+            // Dark Basaltic Lunar Maria (dark grey plains)
             for (let m = 0; m < maria.length; m++) {
                 const ma = maria[m];
                 const dx = (nx - ma.cx) / ma.rx;
@@ -639,30 +719,37 @@ function createMoonTexture() {
                 const d2 = dx * dx + dy * dy;
                 if (d2 < 1.0) {
                     const falloff = 1.0 - Math.sqrt(d2);
-                    regolith -= falloff * ma.depth;
+                    regolith -= falloff * ma.depth * (0.8 + 0.2 * Math.abs(n2));
                 }
             }
 
+            // Impact Crater rims & bright ejecta rays
             for (let c = 0; c < craters.length; c++) {
                 const cr = craters[c];
                 const dx = nx - cr.cx;
                 const dy = ny - cr.cy;
                 const d = Math.hypot(dx, dy);
                 if (d < cr.r) {
+                    // Crater interior & raised bright rim
                     const rim = Math.sin((d / cr.r) * Math.PI);
                     regolith += rim * 0.25;
                 } else if (d < cr.rayLen) {
+                    // Bright radial ejecta rays
                     const angle = Math.atan2(dy, dx);
                     const rayNoise = Math.sin(angle * 12.0) * 0.5 + 0.5;
-                    regolith += (1.0 - d / cr.rayLen) * rayNoise * 0.18;
+                    const rayFalloff = (1.0 - d / cr.rayLen) * rayNoise * 0.18;
+                    regolith += rayFalloff;
                 }
             }
 
+            // Map to photorealistic white & greyish regolith tones
             const val = Math.max(0.0, Math.min(1.0, regolith));
+            // Dark maria: ~105-135 grey, Highlands: ~180-210 grey, Bright ejecta rims: ~225-245 white-grey
             const grey = Math.floor(100 + val * 135);
-            data[idx] = Math.min(255, Math.floor(grey * 0.98));
-            data[idx + 1] = Math.min(255, Math.floor(grey * 0.99));
-            data[idx + 2] = Math.min(255, grey);
+            // Very subtle cool lunar silver-white tint
+            data[idx] = Math.min(255, Math.floor(grey * 0.98));     // R
+            data[idx + 1] = Math.min(255, Math.floor(grey * 0.99)); // G
+            data[idx + 2] = Math.min(255, grey);                    // B
             data[idx + 3] = 255;
         }
     }
@@ -682,7 +769,7 @@ const renderer = new THREE.WebGLRenderer({
     powerPreference: "high-performance",
     alpha: false
 });
-renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.6));
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2.0));
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.outputEncoding = THREE.sRGBEncoding;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -710,8 +797,8 @@ const fillLight = new THREE.DirectionalLight(0x223650, 0.3);
 fillLight.position.set(150, 50, 150);
 scene.add(fillLight);
 
-// --- 1. DEEP-SPACE CELESTIAL STARFIELD ---
-const starCount = (typeof window !== 'undefined' && window.innerWidth < 768) ? 20000 : 42000;
+// --- 1. DEEP-SPACE CELESTIAL STARFIELD (50,000 Natural Twinkling Stars) ---
+const starCount = 50000;
 const starGeo = new THREE.BufferGeometry();
 const starPos = new Float32Array(starCount * 3);
 const starColors = new Float32Array(starCount * 3);
@@ -723,12 +810,11 @@ const corridorCenterX = 0;
 const corridorCenterY = 20;
 const corridorCenterZ = -1100;
 
-const sphereStarCount = Math.floor(starCount * 0.68);
 for (let i = 0; i < starCount; i++) {
     const i3 = i * 3;
     let x, y, z;
 
-    if (i < sphereStarCount) {
+    if (i < 34000) {
         // Celestial Sphere stars surrounding the whole scene in all 360 degrees
         const u = Math.random() * 2 - 1; // cos(phi)
         const theta = Math.random() * Math.PI * 2;
@@ -1096,7 +1182,9 @@ function createCraggyStoneGeometry(detail = 1, roughness = 0.32, stretchY = 0.85
 }
 
 const stoneGeos = [
-    new THREE.DodecahedronGeometry(1.0, 0)
+    createCraggyStoneGeometry(1, 0.35, 0.82, 1.25), // Elongated cratered chondrite boulder
+    createCraggyStoneGeometry(1, 0.24, 0.95, 1.05), // Dense faceted asteroid rock
+    createCraggyStoneGeometry(0, 0.32, 0.75, 1.35)  // Angular jagged meteorite rock chunk
 ];
 
 const stoneMaterials = [
@@ -1387,8 +1475,8 @@ function gradeEarthTexture(sourceImageOrCanvas) {
     if (!sourceImageOrCanvas) return null;
     try {
         const canvas = document.createElement('canvas');
-        const w = Math.min(sourceImageOrCanvas.width || 1024, 1024);
-        const h = Math.min(sourceImageOrCanvas.height || 512, 512);
+        const w = sourceImageOrCanvas.width || 2048;
+        const h = sourceImageOrCanvas.height || 1024;
         canvas.width = w;
         canvas.height = h;
         const ctx = canvas.getContext('2d');
@@ -1402,27 +1490,35 @@ function gradeEarthTexture(sourceImageOrCanvas) {
             const g = data[i + 1];
             const b = data[i + 2];
 
+            // Detect polar snow / ice caps
             const isSnow = (r > 200 && g > 200 && b > 200 && Math.abs(r - g) < 30 && Math.abs(g - b) < 30);
+            // Detect water bodies vs continental landmasses
             const isWater = !isSnow && ((b > r + 3 && b >= g - 12) || (b > 45 && r < 40 && g < 75));
 
             if (isSnow) {
+                // Polar Ice Caps & Glacier peaks stay crisp brilliant snow-white
                 data[i] = 255;
                 data[i + 1] = 255;
                 data[i + 2] = 255;
             } else if (isWater) {
-                const luma = (r * 0.299 + g * 0.587 + b * 0.114) * 0.00392157;
+                // --- COLOR GRADE OCEAN: RADIANT SAPPHIRE BLUE & CARIBBEAN CYAN ---
+                const luma = (r * 0.299 + g * 0.587 + b * 0.114) / 255.0;
                 if (luma > 0.26) {
-                    const t = Math.min(1.0, (luma - 0.26) * 2.857);
-                    data[i] = Math.floor(t * 18);
+                    // Shallow Continental Shelf / Caribbean / Bahamas: Glowing Cyan-Turquoise
+                    const t = Math.min(1.0, (luma - 0.26) / 0.35);
+                    data[i] = Math.floor(0 + t * 18);
                     data[i + 1] = Math.floor(135 + t * 85);
                     data[i + 2] = Math.floor(215 + t * 40);
                 } else {
-                    const t = Math.min(1.0, luma * 3.846);
+                    // Open Deep Ocean: Rich, luminous royal sapphire space blue
+                    const t = Math.min(1.0, luma / 0.26);
                     data[i] = Math.floor(5 + t * 10);
                     data[i + 1] = Math.floor(58 + t * 65);
                     data[i + 2] = Math.floor(170 + t * 75);
                 }
             } else {
+                // --- COLOR GRADE LAND: LUSH FRESH GREEN (STRICTLY REMOVE ALL BROWN TINTS) ---
+                // Convert brownish/tan deserts, mountains, and soil into fresh living green
                 const newR = Math.floor(r * 0.30 + g * 0.12);
                 const newG = Math.min(255, Math.floor(g * 1.25 + r * 0.45 + 40));
                 const newB = Math.floor(b * 0.40 + g * 0.18 + 15);
@@ -1452,7 +1548,7 @@ earthGroup.rotation.x = THREE.MathUtils.degToRad(8);
 
 const earthGeo = new THREE.SphereGeometry(38, 128, 128);
 const earthMat = new THREE.MeshStandardMaterial({
-    color: 0x0c2540,
+    map: createEarthTexture(),
     roughness: 0.38,
     metalness: 0.08,
     emissive: 0x000000, // Zero brown wash
@@ -1471,7 +1567,6 @@ loadPlanetTextureSafe(
     (tex) => {
         const graded = gradeEarthTexture(tex.image);
         earthMat.map = graded || tex;
-        earthMat.color.setHex(0xffffff);
         earthMat.needsUpdate = true;
     }
 );
@@ -1490,9 +1585,10 @@ loadPlanetTextureSafe(
 // Earth Dynamic Clouds Layer (NASA Real Swirling Storm Systems in Pure Crisp White)
 const cloudsGeo = new THREE.SphereGeometry(38.65, 128, 128);
 const cloudsMat = new THREE.MeshStandardMaterial({
+    map: createCloudsTexture(),
     color: 0xffffff,
     transparent: true,
-    opacity: 0.0,
+    opacity: 0.92,
     roughness: 0.85,
     emissive: 0xffffff,
     emissiveIntensity: 0.12, // Keeps clouds crisp, luminous, pure white like seen from orbit
@@ -1509,7 +1605,6 @@ loadPlanetTextureSafe(
     createCloudsTexture,
     (tex) => {
         cloudsMat.map = tex;
-        cloudsMat.opacity = 0.92;
         cloudsMat.needsUpdate = true;
     }
 );
@@ -1585,7 +1680,7 @@ scene.add(earthGroup);
 const moonGroup = new THREE.Group();
 const moonGeo = new THREE.SphereGeometry(8.0, 64, 64);
 const moonMat = new THREE.MeshStandardMaterial({
-    color: 0x909095,
+    map: createMoonTexture(),
     roughness: 0.92,
     metalness: 0.02
 });
@@ -1600,7 +1695,6 @@ loadPlanetTextureSafe(
     createMoonTexture,
     (tex) => {
         moonMat.map = tex;
-        moonMat.color.setHex(0xffffff);
         moonMat.needsUpdate = true;
     }
 );
@@ -1744,7 +1838,7 @@ let isFreeCamActive = false;
 window.addEventListener('mousemove', (e) => {
     mouseX = (e.clientX / window.innerWidth - 0.5) * 12;
     mouseY = (e.clientY / window.innerHeight - 0.5) * 12;
-}, { passive: true });
+});
 
 // Toggle Look Mode
 const freeCamBtn = document.getElementById('camera-free-toggle');
@@ -1792,38 +1886,21 @@ for (let i = 0; i < cameraWaypoints.length - 1; i++) {
     }, i);
 }
 
-const hudSpeedEl = document.getElementById('hud-speed');
-const hudCoordEl = document.getElementById('hud-coordinates');
-const hudScrollPrompt = document.getElementById('scroll-prompt');
-const hudCoordinatorEl = document.getElementById('hud-coordinator');
-let cachedNavDots = null;
-let lastActiveDotIndex = -1;
-let lastSpeedText = '';
-let lastCoordText = '';
-let lastScrollPromptHidden = null;
-let lastHudCoordinatorHidden = null;
-
 function updateTelemetryOnScroll(progress) {
     // Speed telemetry calculation
-    const speed = (0.18 + progress * 8.42).toFixed(2) + ' c';
-    if (speed !== lastSpeedText && hudSpeedEl) {
-        hudSpeedEl.textContent = speed;
-        lastSpeedText = speed;
-    }
+    const speed = (0.18 + progress * 8.42).toFixed(2);
+    const speedEl = document.getElementById('hud-speed');
+    if (speedEl) speedEl.textContent = `${speed} c`;
 
     // Active dot navigation indicator
     const sectionIndex = Math.min(Math.floor(progress * 5), 4);
-    if (sectionIndex !== lastActiveDotIndex) {
-        if (!cachedNavDots) cachedNavDots = document.querySelectorAll('.nav-dot');
-        cachedNavDots.forEach((dot, idx) => {
-            if (idx === sectionIndex) {
-                dot.className = "nav-dot w-3 h-3 rounded-full bg-cyan-400 scale-125 shadow-[0_0_10px_#00f0ff] transition-all";
-            } else {
-                dot.className = "nav-dot w-3 h-3 rounded-full bg-slate-700 transition-all hover:scale-125";
-            }
-        });
-        lastActiveDotIndex = sectionIndex;
-    }
+    document.querySelectorAll('.nav-dot').forEach((dot, idx) => {
+        if (idx === sectionIndex) {
+            dot.className = "nav-dot w-3 h-3 rounded-full bg-cyan-400 scale-125 shadow-[0_0_10px_#00f0ff] transition-all";
+        } else {
+            dot.className = "nav-dot w-3 h-3 rounded-full bg-slate-700 transition-all hover:scale-125";
+        }
+    });
 
     // Warp system streaks visibility increases toward section 5
     if (progress > 0.7) {
@@ -1835,36 +1912,36 @@ function updateTelemetryOnScroll(progress) {
     // Update Galactic Coordinates display
     const raH = Math.floor(18 + progress * 4);
     const decDeg = Math.floor(38 - progress * 24);
-    const coordStr = `RA ${raH}h 36m | DEC +${decDeg}° 12′`;
-    if (coordStr !== lastCoordText && hudCoordEl) {
-        hudCoordEl.textContent = coordStr;
-        lastCoordText = coordStr;
-    }
+    const coordEl = document.getElementById('hud-coordinates');
+    if (coordEl) coordEl.textContent = `RA ${raH}h 36m | DEC +${decDeg}° 12′`;
 
     // Auto-hide scroll prompt once user starts navigating so it doesn't obstruct mobile cards
-    if (hudScrollPrompt) {
-        const shouldHidePrompt = progress > 0.03;
-        if (shouldHidePrompt !== lastScrollPromptHidden) {
-            lastScrollPromptHidden = shouldHidePrompt;
-            hudScrollPrompt.style.opacity = shouldHidePrompt ? '0' : '1';
-            hudScrollPrompt.style.pointerEvents = shouldHidePrompt ? 'none' : 'auto';
-            hudScrollPrompt.style.transition = 'opacity 0.3s ease';
+    const scrollPrompt = document.getElementById('scroll-prompt');
+    if (scrollPrompt) {
+        if (progress > 0.03) {
+            scrollPrompt.style.opacity = '0';
+            scrollPrompt.style.pointerEvents = 'none';
+            scrollPrompt.style.transition = 'opacity 0.3s ease';
+        } else {
+            scrollPrompt.style.opacity = '1';
+            scrollPrompt.style.pointerEvents = 'auto';
         }
     }
 
     // On mobile viewports, auto-hide the fixed coordinator card while scrolling through department cards
-    if (hudCoordinatorEl) {
+    const hudCoordinator = document.getElementById('hud-coordinator');
+    if (hudCoordinator) {
         if (window.innerWidth < 768) {
-            const shouldHideHud = (progress > 0.03 && progress < 0.95);
-            if (shouldHideHud !== lastHudCoordinatorHidden) {
-                lastHudCoordinatorHidden = shouldHideHud;
-                hudCoordinatorEl.style.opacity = shouldHideHud ? '0' : '1';
-                hudCoordinatorEl.style.pointerEvents = shouldHideHud ? 'none' : 'auto';
+            if (progress > 0.03 && progress < 0.95) {
+                hudCoordinator.style.opacity = '0';
+                hudCoordinator.style.pointerEvents = 'none';
+            } else {
+                hudCoordinator.style.opacity = '1';
+                hudCoordinator.style.pointerEvents = 'auto';
             }
-        } else if (lastHudCoordinatorHidden !== false) {
-            lastHudCoordinatorHidden = false;
-            hudCoordinatorEl.style.opacity = '1';
-            hudCoordinatorEl.style.pointerEvents = 'auto';
+        } else {
+            hudCoordinator.style.opacity = '1';
+            hudCoordinator.style.pointerEvents = 'auto';
         }
     }
 }
@@ -1938,7 +2015,7 @@ function handleWindowResize() {
         camera.fov = 50;
     }
     camera.updateProjectionMatrix();
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.6));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.setSize(w, h);
     const hudCoord = document.getElementById('hud-coordinator');
     if (hudCoord && w >= 768) {
@@ -1946,25 +2023,15 @@ function handleWindowResize() {
         hudCoord.style.pointerEvents = 'auto';
     }
 }
-window.addEventListener('resize', handleWindowResize, { passive: true });
+window.addEventListener('resize', handleWindowResize);
 handleWindowResize();
 
 // Animation Loop
 const clock = new THREE.Clock();
-let isPageVisible = !document.hidden;
-
-document.addEventListener('visibilitychange', () => {
-    isPageVisible = !document.hidden;
-    if (isPageVisible) {
-        clock.getDelta();
-        requestAnimationFrame(animate);
-    }
-}, { passive: true });
 
 function animate() {
-    if (!isPageVisible) return;
     requestAnimationFrame(animate);
-    const delta = Math.min(clock.getDelta(), 0.1);
+    const delta = clock.getDelta();
     const elapsedTime = clock.getElapsedTime();
 
     // Animate Starfield Twinkle

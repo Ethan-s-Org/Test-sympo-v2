@@ -4,7 +4,7 @@ const camera = new THREE.PerspectiveCamera(65, innerWidth / innerHeight, 0.1, 10
 camera.position.z = 4.8;
 
 const renderer = new THREE.WebGLRenderer({canvas, alpha:true, antialias:true});
-renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.6));
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
 renderer.setSize(innerWidth, innerHeight);
 
 const group = new THREE.Group();
@@ -40,18 +40,9 @@ let mx=0,my=0;
 window.addEventListener("pointermove",e=>{
   mx=(e.clientX/innerWidth-.5)*.6;
   my=(e.clientY/innerHeight-.5)*.4;
-}, { passive: true });
-
-let isPageVisible = !document.hidden;
-document.addEventListener("visibilitychange", () => {
-  isPageVisible = !document.hidden;
-  if (isPageVisible) {
-    requestAnimationFrame(animate);
-  }
-}, { passive: true });
+});
 
 function animate(){
-  if (!isPageVisible) return;
   requestAnimationFrame(animate);
   stars.rotation.y += .00045;
   stars.rotation.x += .00012;
@@ -64,9 +55,8 @@ animate();
 window.addEventListener("resize",()=>{
   camera.aspect=innerWidth/innerHeight;
   camera.updateProjectionMatrix();
-  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.6));
   renderer.setSize(innerWidth,innerHeight);
-}, { passive: true });
+});
 
 let isModalHistoryPushed = false;
 
@@ -238,14 +228,14 @@ document.querySelectorAll(".event-card").forEach((card,i)=>{
     entries.forEach(entry=>{
       if(entry.isIntersecting){
         setTimeout(()=>{
-          card.style.transition="opacity .6s ease, transform .6s ease";
+          card.style.transition="opacity .6s cubic-bezier(0.16, 1, 0.3, 1), transform .6s cubic-bezier(0.16, 1, 0.3, 1)";
           card.style.opacity="1";
           card.style.transform="translateY(0)";
         },i*90);
-        observer.disconnect();
+        observer.unobserve(entry.target);
       }
     });
-  },{threshold:.12});
+  },{threshold:.06, rootMargin: '0px 0px -20px 0px'});
   observer.observe(card);
 });
 

@@ -258,6 +258,100 @@
   letter-spacing: 0.5px;
 }
 
+/* ==========================================
+   LAPTOP & DESKTOP MODAL SCROLLING & NEON SCROLLBAR
+   ========================================== */
+.modal-overlay {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.modal-overlay.open {
+  display: flex;
+}
+
+.modal {
+  width: min(580px, 100%);
+  max-height: calc(100vh - 48px);
+  max-height: calc(100dvh - 48px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+  position: relative;
+  padding: 32px 28px;
+  border-radius: 15px;
+  margin: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #00f3ff rgba(0, 243, 255, 0.08);
+}
+
+/* Cyberpunk Neon Scrollbar */
+.modal::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal::-webkit-scrollbar-track {
+  background: rgba(0, 243, 255, 0.04);
+  border-radius: 4px;
+}
+
+.modal::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00f3ff, #0077ff);
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+}
+
+.modal::-webkit-scrollbar-thumb:hover {
+  background: #19ff9c;
+  box-shadow: 0 0 14px rgba(25, 255, 156, 0.8);
+}
+
+.modal .cyber-btn.full {
+  margin-top: 18px;
+  margin-bottom: 2px;
+}
+
+/* Page Level Neon Scrollbar & Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #020208;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00f3ff, #0077ff);
+  border-radius: 4px;
+  box-shadow: 0 0 8px rgba(0, 243, 255, 0.4);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #19ff9c;
+  box-shadow: 0 0 12px rgba(25, 255, 156, 0.7);
+}
+
+.content-section {
+  scroll-margin-top: 130px;
+}
+
 @media (max-width: 600px) {
   .modal-overlay {
     padding: 12px 8px;

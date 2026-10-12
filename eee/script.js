@@ -29,7 +29,7 @@ const renderer = new THREE.WebGLRenderer({
 });
 
 renderer.setPixelRatio(
-  Math.min(window.devicePixelRatio || 1, 1.6)
+  Math.min(devicePixelRatio, 2)
 );
 
 renderer.setSize(
@@ -138,10 +138,14 @@ let my = 0;
 window.addEventListener(
   "pointermove",
   (e) => {
-    mx = (e.clientX / innerWidth - 0.5) * 0.6;
-    my = (e.clientY / innerHeight - 0.5) * 0.4;
-  },
-  { passive: true }
+
+    mx =
+      (e.clientX / innerWidth - 0.5) * 0.6;
+
+    my =
+      (e.clientY / innerHeight - 0.5) * 0.4;
+
+  }
 );
 
 
@@ -149,25 +153,33 @@ window.addEventListener(
 // ANIMATION
 // ==========================================
 
-let isTabVisible = true;
-document.addEventListener("visibilitychange", () => {
-  isTabVisible = !document.hidden;
-  if (isTabVisible) requestAnimationFrame(animate);
-});
-
 function animate() {
-  if (!isTabVisible) return;
 
-  requestAnimationFrame(animate);
+  requestAnimationFrame(
+    animate
+  );
+
 
   stars.rotation.y += 0.00045;
+
   stars.rotation.x += 0.00012;
 
-  group.rotation.y += (mx - group.rotation.y) * 0.012;
-  group.rotation.x += (-my - group.rotation.x) * 0.012;
 
-  renderer.render(scene, camera);
+  group.rotation.y +=
+    (mx - group.rotation.y) * 0.012;
+
+
+  group.rotation.x +=
+    (-my - group.rotation.x) * 0.012;
+
+
+  renderer.render(
+    scene,
+    camera
+  );
+
 }
+
 
 animate();
 
@@ -179,12 +191,19 @@ animate();
 window.addEventListener(
   "resize",
   () => {
-    camera.aspect = innerWidth / innerHeight;
+
+    camera.aspect =
+      innerWidth / innerHeight;
+
     camera.updateProjectionMatrix();
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.6));
-    renderer.setSize(innerWidth, innerHeight);
-  },
-  { passive: true }
+
+
+    renderer.setSize(
+      innerWidth,
+      innerHeight
+    );
+
+  }
 );
 
 
